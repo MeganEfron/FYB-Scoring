@@ -107,10 +107,14 @@
     
     NSMutableArray *rounds = [NSMutableArray new];
     
+    NSInteger startingPlayerIndex = 0;
+    
     // Create model
     for (NSInteger i = 0; i < totalRounds; i++) {
         // Creating new round
         FYBRound *newRound = [FYBRound new];
+        
+        newRound.startingPlayer = startingPlayerIndex;
         
         // Unique identifier of round (0 - total amount of rounds e.g. 22)
         newRound.roundNumber = i;
@@ -131,6 +135,11 @@
         
         // Add rounds to rounds array
         [rounds addObject:newRound];
+        
+        startingPlayerIndex++;
+        
+        if (startingPlayerIndex == [self.players count])
+            startingPlayerIndex = 0;
     }
     
     

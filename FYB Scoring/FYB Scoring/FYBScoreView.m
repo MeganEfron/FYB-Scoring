@@ -29,12 +29,11 @@
     self.madeLabel = [UILabel new];
     self.scoreLabel = [UILabel new];
     
-    self.scoreLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize] + 5];
+    self.scoreLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize] + 7];
     
-    
-    self.betLabel.text = @"1";
-    self.madeLabel.text = @"2";
-    self.scoreLabel.text = @"25";
+//    self.betLabel.text = @"1";
+//    self.madeLabel.text = @"2";
+//    self.scoreLabel.text = @"25";
     
     self.betLabel.textAlignment = NSTextAlignmentCenter;
     self.madeLabel.textAlignment = NSTextAlignmentCenter;

@@ -8,15 +8,18 @@
 
 #import "FYBScoringCell.h"
 #import "FYBScoreView.h"
+#import "UIColor+Extended.h"
 
 
 @interface FYBScoringCell ()
+
+@property (strong, nonatomic) NSMutableArray *scoreViewArray;
 
 @end
 
 @implementation FYBScoringCell
 
-- (instancetype)initWithAmountOfPlayers:(NSInteger)amountOfPlayers {
+- (instancetype)initWithAmountOfPlayers:(NSInteger)amountOfPlayers  {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseIdentifier];
     
     if (self) {
@@ -50,6 +53,7 @@
         FYBScoreView *newView = [FYBScoreView new];
         newView.layer.borderColor = [[UIColor blackColor] CGColor];
         newView.layer.borderWidth = 0.3;
+        
         [self addSubview:newView];
         
         
@@ -62,6 +66,12 @@
         
         [self.scoreViewArray addObject:newView];
     }
+}
+
+- (void)colorStartingPlayer:(NSInteger)startingPlayer {
+    
+    FYBScoreView *scoreView = self.scoreViewArray[startingPlayer];
+    scoreView.backgroundColor = [UIColor startingCellColor];
 }
 
 

@@ -14,6 +14,8 @@
 
 + (UIColor*)backgroundColor;
 
++ (UIColor*)startingCellColor;
+
 + (UIColor*)randomColor;
 
 @end

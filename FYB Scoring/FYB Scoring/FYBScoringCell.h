@@ -12,8 +12,8 @@
 
 @property (nonatomic) NSInteger amountOfPlayers;
 @property (nonatomic, strong) UILabel *roundNumberLabel;
-@property (strong, nonatomic) NSMutableArray *scoreViewArray;
 
 - (instancetype)initWithAmountOfPlayers:(NSInteger)amountOfPlayers;
+- (void)colorStartingPlayer:(NSInteger)startingPlayer;
 
 @end

@@ -11,6 +11,7 @@
 #import "FYBScoringCell.h"
 #import "FYBRound.h"
 #import "FYBSectionHeaderView.h"
+#import "FYBScoreView.h"
 
 
 static NSString *const FYBPlayerNameCell = @"FYBPlayerNameCell";
@@ -79,6 +80,8 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
     
     FYBRound *round = self.rounds[indexPath.row];
     cell.roundNumberLabel.text = [@(round.amountOfCards) stringValue];
+    [cell colorStartingPlayer:round.startingPlayer];
+    
 }
 
 

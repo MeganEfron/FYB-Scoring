@@ -30,4 +30,10 @@
     return randomColour;
 }
 
++ (UIColor*)startingCellColor {
+    UIColor *startingCellColor = [UIColor colorWithRed:0.840 green:1.000 blue:0.811 alpha:1.000];
+    
+    return startingCellColor;
+}
+
 @end
