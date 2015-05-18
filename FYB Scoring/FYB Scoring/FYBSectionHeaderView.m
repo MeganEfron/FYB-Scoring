@@ -7,6 +7,7 @@
 //
 
 #import "FYBSectionHeaderView.h"
+#import "FYBPlayer.h"
 
 @implementation FYBSectionHeaderView
 
@@ -28,7 +29,8 @@
     for (NSInteger i = 0; i < [self.players count]; i++)
     {
         UILabel* newLabel = [UILabel new];
-        newLabel.text = self.players[i];
+        FYBPlayer *player = self.players[i];
+        newLabel.text = player.name;
         newLabel.textAlignment = NSTextAlignmentCenter;
         
         [self addSubview:newLabel];

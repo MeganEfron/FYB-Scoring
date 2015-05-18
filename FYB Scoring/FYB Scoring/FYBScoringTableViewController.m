@@ -42,16 +42,24 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
 }
 
 
+
+
 #pragma mark - Table View Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
     return 1;
 }
 
+
+
+
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
     return [self.rounds count];
 }
+
+
+
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
@@ -64,15 +72,18 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
     return cell;
 }
 
+
+
+
 - (void)configureCell:(FYBScoringCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     FYBRound *round = self.rounds[indexPath.row];
     cell.roundNumberLabel.text = [@(round.amountOfCards) stringValue];
 }
 
-- (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
-    return nil;
-}
+
+
+
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
     FYBSectionHeaderView* headerView = [[FYBSectionHeaderView alloc] initWithPlayers:self.players];
@@ -80,16 +91,18 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
     return headerView;
 }
 
+
+
+
 - (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
     return 50;
 }
 
-//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section {
-//    return 50;
-//}
+
 
 
 #pragma mark - Table View Delegate
+
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     

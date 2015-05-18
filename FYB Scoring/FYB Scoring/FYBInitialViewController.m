@@ -124,7 +124,7 @@
             FYBEntry *newEntry = [FYBEntry new];
             newEntry.betValue = 0;
             newEntry.madeValue = 0;
-            newEntry.player = self.players[i];
+            newEntry.player = self.players[j];
             
             [newRound.entries addObject:newEntry];
         }
