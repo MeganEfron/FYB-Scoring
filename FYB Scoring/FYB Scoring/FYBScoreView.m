@@ -10,6 +10,7 @@
 #import "UIColor+Extended.h"
 #import "FYBEntry.h"
 #import "FYBPlayer.h"
+#import "FYBScoringTableViewController.h"
 
 @interface FYBScoreView ()  <UITextFieldDelegate>
 
@@ -52,12 +53,10 @@
     self.betTextField.delegate = self;
     self.madeTextField.delegate = self;
     
-    // Giving the value entered into the model entry
-//    self.entry.betValue = [self.betTextField.text integerValue];
-//    self.entry.madeValue = [self.madeTextField.text integerValue];
-    
     // Displaying the score
-//    self.scoreLabel.text = self.entry.player.score ? [@(self.entry.player.score) stringValue] : @"";
+    self.madeTextField.text = self.entry.madeValue ? [@(self.entry.madeValue) stringValue] : @"";
+    self.betTextField.text = self.entry.betValue ? [@(self.entry.betValue) stringValue] : @"";
+    self.scoreLabel.text = self.entry.scoreForEntry ? [@(self.entry.scoreForEntry) stringValue] : @"";
     
     // Aligning all text to the center
     self.betTextField.textAlignment = NSTextAlignmentCenter;
@@ -101,36 +100,35 @@
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     
+    NSInteger previousBet = self.entry.betValue;
+    NSInteger previousMade = self.entry.madeValue;
+    
+    // If the textfield is the BET text field
     if (textField == self.betTextField)
     {
         self.entry.betValue = [textField.text integerValue];
-        NSLog(@"Setting entry to %i", self.entry.betValue);
     }
+    
+    // If the textfield is the MADE text field
     else if (textField == self.madeTextField)
     {
         self.entry.madeValue = [textField.text integerValue];
-        NSLog(@"Setting entry to %i", self.entry.madeValue);
     }
     
     // Calculating score and displaying
     if (self.entry.betValue && self.entry.madeValue)
     {
-        NSInteger scoreToAdd;
         
-        if (self.entry.betValue == self.entry.madeValue)
+        if (previousBet && previousMade)
         {
-            scoreToAdd = self.entry.betValue * self.entry.betValue + 10;
+            NSInteger scoreToSubtract = -[self calculateScoreFromBet:previousBet made:previousMade];
+            [self.entry.player addToScore:scoreToSubtract];
         }
-        else
-        {
-            scoreToAdd = (self.entry.betValue - self.entry.madeValue) * 2;
-            if (scoreToAdd > 0)
-            {
-                scoreToAdd = -scoreToAdd;
-            }
-        }
+        
+        NSInteger scoreToAdd = [self calculateScoreFromBet:self.entry.betValue made:self.entry.madeValue];
         
         [self.entry.player addToScore:scoreToAdd];
+        self.entry.scoreForEntry = self.entry.player.score;
         
         self.scoreLabel.text = [@(self.entry.player.score) stringValue];
     }
@@ -139,9 +137,23 @@
 }
 
 
-- (void)setPlaceholders {
-	self.betTextField.placeholder = @"B";
-    self.madeTextField.placeholder = @"M";
+
+- (NSInteger) calculateScoreFromBet:(NSInteger)bet made:(NSInteger)made {
+    NSInteger score;
+    
+    if (bet == made)
+        score = bet * made + 10;
+    else
+    {
+        score = (bet - made) * 2;
+        if (score > 0)
+        {
+            score = -score;
+        }
+    }
+    
+    return score;
 }
+
 
 @end

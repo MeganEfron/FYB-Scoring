@@ -15,17 +15,11 @@
 #import "FYBPlayer.h"
 
 
-static NSString *const FYBPlayerNameCell = @"FYBPlayerNameCell";
-static NSString *const FYBScoreCell = @"FYBScoreCell";
-
-
 @interface FYBScoringTableViewController ()
 
 // MODEL
 @property (nonatomic, strong) NSArray *rounds; // of FYBRound
 @property (nonatomic, strong) NSArray *players; // of FYBPlayer
-
-@property (nonatomic) NSInteger currentRound;
 
 @end
 
@@ -38,8 +32,7 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
     if (self) {
         self.rounds = rounds;
         self.players = players;
-        
-        self.currentRound = 5;
+
     }
     return self;
 }
@@ -90,12 +83,11 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
     [cell colorStartingPlayer:round.startingPlayer];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
-    // Setting all values after current round not able to played
-    if (indexPath.row > self.currentRound) {
-        cell.backgroundColor = [UIColor grayColor];
+//    Setting all values after current round not able to played
+    if (indexPath.row != [[FYBGameManager sharedManager] getCurrentRound]) {
+//        cell.backgroundColor = [UIColor grayColor];
         cell.userInteractionEnabled = NO;
     }
-    
 }
 
 
@@ -120,19 +112,13 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
 
 #pragma mark - Table View Delegate
 
-
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == self.currentRound)
-    {
-        
-    }
 }
 
-
-
-- (void) nextRound {
-    self.currentRound++;
+- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
 }
+
 
 @end

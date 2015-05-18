@@ -13,11 +13,15 @@
 #import "FYBEntry.h"
 #import "FYBPlayer.h"
 
-@interface FYBInitialViewController ()
+@interface FYBInitialViewController ()      <UITableViewDataSource>
 
 @property (nonatomic, strong) NSArray *players;
 @property (nonatomic) NSInteger amountOfRounds;
 @property (nonatomic) NSInteger roundIndex;
+
+
+// Views
+@property (nonatomic, strong) UITableView *playerTableView;
 
 @end
 
@@ -46,8 +50,9 @@
     self.title = @"FYB GAME DETAILS";
     
     UIView* superView = self.view;
-    
-    
+
+    self.playerTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped];
+
     // ----- Setting up subviews -----
     
     // Create button to start game

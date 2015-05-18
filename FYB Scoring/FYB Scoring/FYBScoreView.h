@@ -18,6 +18,4 @@
 
 - (instancetype)initWithEntry:(FYBEntry *)entry;
 
-- (void)setPlaceholders;
-
 @end

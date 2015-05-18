@@ -19,6 +19,8 @@
 
 @end
 
+
+
 @implementation FYBScoringCell
 
 - (instancetype)initWithAmountOfPlayers:(NSInteger)amountOfPlayers round:(FYBRound *)round  {

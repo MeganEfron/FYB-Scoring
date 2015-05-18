@@ -10,7 +10,11 @@
 #import "FYBRound.h"
 #import "FYBEntry.h"
 
+static NSInteger CurrentRound = 0;
+
 @implementation FYBGameManager
+
+
 
 + (instancetype)sharedManager {
     static FYBGameManager *_sharedManager = nil;
@@ -21,6 +25,8 @@
     
     return _sharedManager;
 }
+
+
 
 - (BOOL) isRoundFinished:(FYBRound *)round {
     BOOL isRoundFinished = YES;
@@ -35,6 +41,18 @@
     }
     
     return isRoundFinished;
+}
+
+
+
+- (void)nextRound {
+    CurrentRound++;
+}
+
+
+
+- (NSInteger)getCurrentRound {
+    return CurrentRound;
 }
 
 @end
