@@ -11,7 +11,7 @@
 #import "FYBEntry.h"
 #import "FYBPlayer.h"
 
-@interface FYBScoreView ()
+@interface FYBScoreView ()  <UITextInputTraits>
 
 @property (strong, nonatomic) FYBEntry *entry;
 
@@ -30,14 +30,26 @@
 }
 
 - (void)setup {
+    
+    // -------------- Setting up views --------------
     self.betTextField = [UITextField new];
     self.madeTextField = [UITextField new];
     self.scoreLabel = [UILabel new];
     
+    self.betTextField.keyboardType = UIKeyboardTypeNumberPad;
+    self.betTextField.returnKeyType = UIReturnKeyDone;
+    
+    self.madeTextField.keyboardType = UIKeyboardTypeNumberPad;
+    self.madeTextField.returnKeyType = UIReturnKeyDone;
+    
     self.scoreLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize] + 7];
     
-    self.betTextField.text = self.entry.betValue ? [@(self.entry.betValue) stringValue] : @"";
-    self.madeTextField.text = self.entry.madeValue ? [@(self.entry.madeValue) stringValue] : @"";
+//    self.betTextField.text = self.entry.betValue ? [@(self.entry.betValue) stringValue] : @"";
+//    self.madeTextField.text = self.entry.madeValue ? [@(self.entry.madeValue) stringValue] : @"";
+    
+    self.entry.betValue = [self.betTextField.text integerValue];
+    self.entry.madeValue = [self.madeTextField.text integerValue];
+    
     self.scoreLabel.text = self.entry.player.score ? [@(self.entry.player.score) stringValue] : @"";
     
     self.betTextField.textAlignment = NSTextAlignmentCenter;
@@ -51,13 +63,13 @@
     [self.betTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).with.offset(5);
         make.height.equalTo(self);
-        make.width.mas_equalTo(@20);
+        make.width.mas_equalTo(@30);
     }];
     
     [self.madeTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).with.offset(-5);
         make.height.equalTo(self);
-        make.width.mas_equalTo(@20);
+        make.width.mas_equalTo(@30);
     }];
     
     [self.scoreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -68,7 +80,8 @@
 }
 
 - (void)setPlaceholders {
-//	self.betLabel
+	self.betTextField.placeholder = @"B";
+    self.madeTextField.placeholder = @"M";
 }
 
 @end
