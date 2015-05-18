@@ -8,12 +8,14 @@
 
 #import <UIKit/UIKit.h>
 
+@class FYBRound;
+
 @interface FYBScoringCell : UITableViewCell
 
 @property (nonatomic) NSInteger amountOfPlayers;
 @property (nonatomic, strong) UILabel *roundNumberLabel;
 
-- (instancetype)initWithAmountOfPlayers:(NSInteger)amountOfPlayers;
+- (instancetype)initWithAmountOfPlayers:(NSInteger)amountOfPlayers round:(FYBRound *)round;
 - (void)colorStartingPlayer:(NSInteger)startingPlayer;
 
 @end

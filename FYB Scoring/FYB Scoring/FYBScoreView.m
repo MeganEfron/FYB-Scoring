@@ -8,16 +8,21 @@
 
 #import "FYBScoreView.h"
 #import "UIColor+Extended.h"
+#import "FYBEntry.h"
+#import "FYBPlayer.h"
 
 @interface FYBScoreView ()
+
+@property (strong, nonatomic) FYBEntry *entry;
 
 @end
 
 @implementation FYBScoreView
 
-- (instancetype)init {
+- (instancetype)initWithEntry:(FYBEntry *)entry {
     self = [super init];
     if (self) {
+        self.entry = entry;
         [self setup];
     }
     
@@ -25,31 +30,31 @@
 }
 
 - (void)setup {
-    self.betLabel = [UILabel new];
-    self.madeLabel = [UILabel new];
+    self.betTextField = [UITextField new];
+    self.madeTextField = [UITextField new];
     self.scoreLabel = [UILabel new];
     
     self.scoreLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize] + 7];
     
-//    self.betLabel.text = @"1";
-//    self.madeLabel.text = @"2";
-//    self.scoreLabel.text = @"25";
+    self.betTextField.text = self.entry.betValue ? [@(self.entry.betValue) stringValue] : @"";
+    self.madeTextField.text = self.entry.madeValue ? [@(self.entry.madeValue) stringValue] : @"";
+    self.scoreLabel.text = self.entry.player.score ? [@(self.entry.player.score) stringValue] : @"";
     
-    self.betLabel.textAlignment = NSTextAlignmentCenter;
-    self.madeLabel.textAlignment = NSTextAlignmentCenter;
+    self.betTextField.textAlignment = NSTextAlignmentCenter;
+    self.madeTextField.textAlignment = NSTextAlignmentCenter;
     self.scoreLabel.textAlignment = NSTextAlignmentCenter;
     
-    [self addSubview:self.betLabel];
-    [self addSubview:self.madeLabel];
+    [self addSubview:self.betTextField];
+    [self addSubview:self.madeTextField];
     [self addSubview:self.scoreLabel];
     
-    [self.betLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.betTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.left.equalTo(self).with.offset(5);
         make.height.equalTo(self);
         make.width.mas_equalTo(@20);
     }];
     
-    [self.madeLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+    [self.madeTextField mas_makeConstraints:^(MASConstraintMaker *make) {
         make.right.equalTo(self).with.offset(-5);
         make.height.equalTo(self);
         make.width.mas_equalTo(@20);
@@ -57,9 +62,13 @@
     
     [self.scoreLabel mas_makeConstraints:^(MASConstraintMaker *make) {
         make.center.equalTo(self);
-        make.left.equalTo(self.betLabel.mas_right);
-        make.right.equalTo(self.madeLabel.mas_left);
+        make.left.equalTo(self.betTextField.mas_right);
+        make.right.equalTo(self.madeTextField.mas_left);
     }];
+}
+
+- (void)setPlaceholders {
+//	self.betLabel
 }
 
 @end

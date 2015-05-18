@@ -12,6 +12,7 @@
 #import "FYBRound.h"
 #import "FYBSectionHeaderView.h"
 #import "FYBScoreView.h"
+#import "FYBPlayer.h"
 
 
 static NSString *const FYBPlayerNameCell = @"FYBPlayerNameCell";
@@ -22,6 +23,9 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
 
 // MODEL
 @property (nonatomic, strong) NSArray *rounds; // of FYBRound
+@property (nonatomic, strong) NSArray *players; // of FYBPlayer
+
+@property (nonatomic) NSInteger currentRound;
 
 @end
 
@@ -29,10 +33,13 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
 
 @implementation FYBScoringTableViewController
 
-- (instancetype)initWithStyle:(UITableViewStyle)style rounds:(NSArray *)rounds {
+- (instancetype)initWithStyle:(UITableViewStyle)style rounds:(NSArray *)rounds players:(NSArray *)players {
     self = [super initWithStyle:style];
     if (self) {
         self.rounds = rounds;
+        self.players = players;
+        
+        self.currentRound = 0;
     }
     return self;
 }
@@ -66,7 +73,7 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
     
     FYBScoringCell *cell;
     
-    cell = [[FYBScoringCell alloc] initWithAmountOfPlayers:[self.players count]];
+    cell = [[FYBScoringCell alloc] initWithAmountOfPlayers:[self.players count] round:self.rounds[indexPath.row]];
     
     [self configureCell:cell atIndexPath:indexPath];
     
@@ -81,6 +88,7 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
     FYBRound *round = self.rounds[indexPath.row];
     cell.roundNumberLabel.text = [@(round.amountOfCards) stringValue];
     [cell colorStartingPlayer:round.startingPlayer];
+    cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
 }
 
@@ -109,6 +117,16 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    if (indexPath.row == self.currentRound)
+    {
+        
+    }
+}
+
+
+
+- (void) nextRound {
+    self.currentRound++;
 }
 
 @end

@@ -92,13 +92,16 @@
 
     NSArray *rounds = [self generateRounds];
     
-    FYBScoringTableViewController *scoringSheetController = [[FYBScoringTableViewController alloc] initWithStyle:UITableViewStyleGrouped rounds:rounds];
-    scoringSheetController.players = self.players;
+    FYBScoringTableViewController *scoringSheetController = [[FYBScoringTableViewController alloc] initWithStyle:UITableViewStyleGrouped
+                                                                                                          rounds:rounds
+                                                                                                         players:self.players];
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:scoringSheetController];
     
     [self presentViewController:navController animated:YES completion:nil];
 }
+
+
 
 - (NSArray *)generateRounds {
     

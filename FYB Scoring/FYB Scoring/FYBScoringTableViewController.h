@@ -10,8 +10,6 @@
 
 @interface FYBScoringTableViewController : UITableViewController
 
-@property (nonatomic, strong) NSArray *players;
-
-- (instancetype)initWithStyle:(UITableViewStyle)style rounds:(NSArray *)rounds;
+- (instancetype)initWithStyle:(UITableViewStyle)style rounds:(NSArray *)rounds players:(NSArray *)players;
 
 @end

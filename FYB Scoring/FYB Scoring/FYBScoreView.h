@@ -8,10 +8,16 @@
 
 #import <UIKit/UIKit.h>
 
+@class FYBEntry;
+
 @interface FYBScoreView : UIView
 
-@property (strong, nonatomic) UILabel *betLabel;
-@property (strong, nonatomic) UILabel *madeLabel;
+@property (strong, nonatomic) UITextField *betTextField;
+@property (strong, nonatomic) UITextField *madeTextField;
 @property (strong, nonatomic) UILabel *scoreLabel;
+
+- (instancetype)initWithEntry:(FYBEntry *)entry;
+
+- (void)setPlaceholders;
 
 @end

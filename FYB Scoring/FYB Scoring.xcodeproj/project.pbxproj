@@ -215,10 +215,18 @@
 			children = (
 				44683B601B055A20006AC0E0 /* FYBScoringCell.h */,
 				44683B611B055A20006AC0E0 /* FYBScoringCell.m */,
+				44DF61D91B09BB43007C91A2 /* Score View */,
+			);
+			name = Cells;
+			sourceTree = "<group>";
+		};
+		44DF61D91B09BB43007C91A2 /* Score View */ = {
+			isa = PBXGroup;
+			children = (
 				44045C221B09753100312FB1 /* FYBScoreView.h */,
 				44045C231B09753100312FB1 /* FYBScoreView.m */,
 			);
-			name = Cells;
+			name = "Score View";
 			sourceTree = "<group>";
 		};
 		44F44CA31B03557300AC25AC /* Reuse */ = {

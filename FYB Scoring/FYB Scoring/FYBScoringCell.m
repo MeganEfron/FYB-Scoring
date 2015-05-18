@@ -9,21 +9,24 @@
 #import "FYBScoringCell.h"
 #import "FYBScoreView.h"
 #import "UIColor+Extended.h"
+#import "FYBRound.h"
 
 
 @interface FYBScoringCell ()
 
 @property (strong, nonatomic) NSMutableArray *scoreViewArray;
+@property (strong, nonatomic) FYBRound *round;
 
 @end
 
 @implementation FYBScoringCell
 
-- (instancetype)initWithAmountOfPlayers:(NSInteger)amountOfPlayers  {
+- (instancetype)initWithAmountOfPlayers:(NSInteger)amountOfPlayers round:(FYBRound *)round  {
     self = [super initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseIdentifier];
     
     if (self) {
         
+        self.round = round;
         self.amountOfPlayers = amountOfPlayers;
         
         [self setup];
@@ -50,7 +53,7 @@
     
     for (int i = 0; i < self.amountOfPlayers; i++)
     {
-        FYBScoreView *newView = [FYBScoreView new];
+        FYBScoreView *newView = [[FYBScoreView alloc] initWithEntry:self.round.entries[i]];
         newView.layer.borderColor = [[UIColor blackColor] CGColor];
         newView.layer.borderWidth = 0.3;
         
