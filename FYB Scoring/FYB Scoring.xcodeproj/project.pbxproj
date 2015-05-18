@@ -17,6 +17,8 @@
 		440B114E1B0224490060867A /* FYBInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440B114D1B0224490060867A /* FYBInitialViewController.m */; };
 		44683B621B055A20006AC0E0 /* FYBScoringCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44683B611B055A20006AC0E0 /* FYBScoringCell.m */; };
 		44AFC7651B04CD730006218E /* FYBScoringTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AFC7641B04CD730006218E /* FYBScoringTableViewController.m */; };
+		44DF61CC1B099B4A007C91A2 /* FYBRound.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF61CB1B099B4A007C91A2 /* FYBRound.m */; };
+		44DF61D01B09A299007C91A2 /* FYBSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF61CF1B09A299007C91A2 /* FYBSectionHeaderView.m */; };
 		44F44CA21B03557000AC25AC /* FYBBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F44CA11B03557000AC25AC /* FYBBaseViewController.m */; };
 		44F44CA71B03582B00AC25AC /* UIColor+Extended.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F44CA61B03582B00AC25AC /* UIColor+Extended.m */; };
 		B106A14BF9E6F0363E506D7B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CAEEA0C6A4CD1B8F9E7818D /* libPods.a */; };
@@ -56,6 +58,10 @@
 		44683B611B055A20006AC0E0 /* FYBScoringCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBScoringCell.m; sourceTree = "<group>"; };
 		44AFC7631B04CD730006218E /* FYBScoringTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBScoringTableViewController.h; sourceTree = "<group>"; };
 		44AFC7641B04CD730006218E /* FYBScoringTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBScoringTableViewController.m; sourceTree = "<group>"; };
+		44DF61CA1B099B4A007C91A2 /* FYBRound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBRound.h; sourceTree = "<group>"; };
+		44DF61CB1B099B4A007C91A2 /* FYBRound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBRound.m; sourceTree = "<group>"; };
+		44DF61CE1B09A299007C91A2 /* FYBSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBSectionHeaderView.h; sourceTree = "<group>"; };
+		44DF61CF1B09A299007C91A2 /* FYBSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBSectionHeaderView.m; sourceTree = "<group>"; };
 		44F44CA01B03557000AC25AC /* FYBBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBBaseViewController.h; sourceTree = "<group>"; };
 		44F44CA11B03557000AC25AC /* FYBBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBBaseViewController.m; sourceTree = "<group>"; };
 		44F44CA41B03579300AC25AC /* FYBScoring-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FYBScoring-Prefix.pch"; sourceTree = "<group>"; };
@@ -105,6 +111,7 @@
 		440B112B1B0223B00060867A /* FYB Scoring */ = {
 			isa = PBXGroup;
 			children = (
+				44DF61CD1B099B4C007C91A2 /* Model */,
 				44F44CA81B03583300AC25AC /* Utilities */,
 				44F44CA31B03557300AC25AC /* Reuse */,
 				440B114F1B0224510060867A /* Screens */,
@@ -169,12 +176,39 @@
 			children = (
 				44AFC7631B04CD730006218E /* FYBScoringTableViewController.h */,
 				44AFC7641B04CD730006218E /* FYBScoringTableViewController.m */,
+				44DF61D21B09A328007C91A2 /* Cells */,
+				44DF61D11B09A2A0007C91A2 /* Title Header */,
+			);
+			name = "Scoring Sheet";
+			sourceTree = "<group>";
+		};
+		44DF61CD1B099B4C007C91A2 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				44DF61CA1B099B4A007C91A2 /* FYBRound.h */,
+				44DF61CB1B099B4A007C91A2 /* FYBRound.m */,
+			);
+			name = Model;
+			sourceTree = "<group>";
+		};
+		44DF61D11B09A2A0007C91A2 /* Title Header */ = {
+			isa = PBXGroup;
+			children = (
+				44DF61CE1B09A299007C91A2 /* FYBSectionHeaderView.h */,
+				44DF61CF1B09A299007C91A2 /* FYBSectionHeaderView.m */,
+			);
+			name = "Title Header";
+			sourceTree = "<group>";
+		};
+		44DF61D21B09A328007C91A2 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
 				44683B601B055A20006AC0E0 /* FYBScoringCell.h */,
 				44683B611B055A20006AC0E0 /* FYBScoringCell.m */,
 				44045C221B09753100312FB1 /* FYBScoreView.h */,
 				44045C231B09753100312FB1 /* FYBScoreView.m */,
 			);
-			name = "Scoring Sheet";
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		44F44CA31B03557300AC25AC /* Reuse */ = {
@@ -355,6 +389,8 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				44DF61CC1B099B4A007C91A2 /* FYBRound.m in Sources */,
+				44DF61D01B09A299007C91A2 /* FYBSectionHeaderView.m in Sources */,
 				440B11321B0223B00060867A /* AppDelegate.m in Sources */,
 				44045C241B09753100312FB1 /* FYBScoreView.m in Sources */,
 				44AFC7651B04CD730006218E /* FYBScoringTableViewController.m in Sources */,

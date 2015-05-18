@@ -1,5 +1,5 @@
 //
-//  FYBSharedConstants.h
+//  FYBRound.h
 //  FYB Scoring
 //
 //  Created by Megan Efron on 18/05/2015.
@@ -8,5 +8,8 @@
 
 #import <Foundation/Foundation.h>
 
-extern NSString *const ReuseIdentifier;
-extern CGFloat const TableWidth;
+@interface FYBRound : NSObject
+
+@property (nonatomic) NSInteger roundNumber;
+
+@end

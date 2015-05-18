@@ -9,8 +9,13 @@
 #import "FYBInitialViewController.h"
 #import "UIColor+Extended.h"
 #import "FYBScoringTableViewController.h"
+#import "FYBRound.h"
 
 @interface FYBInitialViewController ()
+
+@property (nonatomic, strong) NSArray *players;
+@property (nonatomic) NSInteger amountOfRounds;
+@property (nonatomic) NSInteger roundIndex;
 
 @end
 
@@ -22,6 +27,10 @@
     [super viewDidLoad];
     
     [self setupView];
+    
+    self.players = @[@"Megan", @"Brogan", @"Rodney", @"Lauri"];
+    self.amountOfRounds = 10;
+    self.roundIndex = self.amountOfRounds + 1;
 }
 
 - (void)setupView {
@@ -57,11 +66,40 @@
     
 }
 
+- (NSInteger)roundNumber:(NSInteger)index /* Maybe pass in something */ {
+    
+    if (index < self.amountOfRounds)
+    {
+        self.roundIndex--;
+    }
+    else if (index >= self.amountOfRounds + [self.players count] - 1)
+    {
+        self.roundIndex++;
+    }
+    
+    return self.roundIndex;
+}
+
 - (void)startGame {
     
-    FYBScoringTableViewController *scoringSheetController = [[FYBScoringTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    scoringSheetController.players = @[@"Megan", @"Brogan", @"Rodney", @"Lauri"];
-    scoringSheetController.amountOfRounds = 10;
+    
+    NSInteger totalRounds = (self.amountOfRounds - 1) * 2 + (int)[self.players count];
+    
+    
+    NSMutableArray *rounds = [NSMutableArray new];
+    
+    // Create model
+    for (NSInteger i = 0; i < totalRounds; i++) {
+        
+        FYBRound *newRound = [FYBRound new];
+        newRound.roundNumber = [self roundNumber:i];
+        [rounds addObject:newRound];
+        NSLog(@"%@", [@(newRound.roundNumber) stringValue]);
+    }
+    
+    FYBScoringTableViewController *scoringSheetController = [[FYBScoringTableViewController alloc] initWithStyle:UITableViewStyleGrouped rounds:rounds];
+//    FYBScoringTableViewController *scoringSheetController = [[FYBScoringTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
+    scoringSheetController.players = self.players;
     
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:scoringSheetController];
     

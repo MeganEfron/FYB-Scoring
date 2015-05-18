@@ -9,3 +9,4 @@
 #import "FYBSharedConstants.h"
 
 NSString* const ReuseIdentifier = @"ReuseIdentifier";
+CGFloat const TableWidth = 768;

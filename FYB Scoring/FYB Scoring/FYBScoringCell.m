@@ -9,11 +9,8 @@
 #import "FYBScoringCell.h"
 #import "FYBScoreView.h"
 
-static CGFloat const TableWidth = 500;
 
 @interface FYBScoringCell ()
-
-@property (strong, nonatomic) NSMutableArray *scoreViewArray;
 
 @end
 
@@ -37,6 +34,7 @@ static CGFloat const TableWidth = 500;
     self.scoreViewArray = [NSMutableArray new];
     
     self.roundNumberLabel = [UILabel new];
+    self.roundNumberLabel.text = [@(self.roundNumber) stringValue];
     [self addSubview:self.roundNumberLabel];
 
     [self.roundNumberLabel mas_makeConstraints:^(MASConstraintMaker *make) {
@@ -46,13 +44,15 @@ static CGFloat const TableWidth = 500;
         make.bottom.equalTo(self);
     }];
     
-    
-    CGFloat viewWidthSize = TableWidth / self.amountOfPlayers;
+    CGFloat viewWidthSize = (TableWidth - 50) / self.amountOfPlayers;
     
     for (int i = 0; i < self.amountOfPlayers; i++)
     {
         FYBScoreView *newView = [FYBScoreView new];
+        newView.layer.borderColor = [[UIColor blackColor] CGColor];
+        newView.layer.borderWidth = 0.3;
         [self addSubview:newView];
+        
         
         [newView mas_makeConstraints:^(MASConstraintMaker *make) {
             make.left.mas_equalTo(50 + (i * viewWidthSize));
@@ -62,7 +62,6 @@ static CGFloat const TableWidth = 500;
         }];
         
         [self.scoreViewArray addObject:newView];
-       
     }
 }
 

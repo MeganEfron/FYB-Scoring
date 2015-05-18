@@ -10,4 +10,8 @@
 
 @interface FYBScoreView : UIView
 
+@property (strong, nonatomic) UILabel *betLabel;
+@property (strong, nonatomic) UILabel *madeLabel;
+@property (strong, nonatomic) UILabel *scoreLabel;
+
 @end

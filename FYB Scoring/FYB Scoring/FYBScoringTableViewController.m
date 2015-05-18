@@ -9,6 +9,7 @@
 #import "FYBScoringTableViewController.h"
 #import "UIColor+Extended.h"
 #import "FYBScoringCell.h"
+#import "FYBRound.h"
 
 
 static NSString *const FYBPlayerNameCell = @"FYBPlayerNameCell";
@@ -17,7 +18,8 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
 
 @interface FYBScoringTableViewController ()
 
-@property (nonatomic) int totalRounds;
+// MODEL
+@property (nonatomic, strong) NSArray *rounds; // of FYBRound
 
 @end
 
@@ -25,13 +27,19 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
 
 @implementation FYBScoringTableViewController
 
-
+- (instancetype)initWithStyle:(UITableViewStyle)style rounds:(NSArray *)rounds {
+    self = [super initWithStyle:style];
+    if (self) {
+        self.rounds = rounds;
+    }
+    return self;
+}
 
 - (void)viewDidLoad {
     
-    self.totalRounds = (self.amountOfRounds - 1) * 2 + (int)[self.players count];
-    
+    self.title = @"SCORING";
 }
+
 
 #pragma mark - Table View Data Source
 
@@ -41,7 +49,7 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
 
-        return (NSInteger)self.totalRounds;
+    return [self.rounds count];
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
@@ -56,12 +64,16 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
 }
 
 - (void)configureCell:(FYBScoringCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    cell.roundNumberLabel.text = [@(indexPath.row) stringValue];
+    
+    FYBRound *round = self.rounds[indexPath.row];
+    cell.roundNumberLabel.text = [@(round.roundNumber) stringValue];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return nil;
 }
+
+
 
 
 #pragma mark - Table View Delegate
