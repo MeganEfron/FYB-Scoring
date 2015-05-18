@@ -11,5 +11,7 @@
 @interface FYBRound : NSObject
 
 @property (nonatomic) NSInteger roundNumber;
+@property (nonatomic) NSInteger amountOfCards;
+@property (nonatomic, strong) NSMutableArray *entries; //of type FYBEntry
 
 @end

@@ -19,6 +19,8 @@
 		44AFC7651B04CD730006218E /* FYBScoringTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AFC7641B04CD730006218E /* FYBScoringTableViewController.m */; };
 		44DF61CC1B099B4A007C91A2 /* FYBRound.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF61CB1B099B4A007C91A2 /* FYBRound.m */; };
 		44DF61D01B09A299007C91A2 /* FYBSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF61CF1B09A299007C91A2 /* FYBSectionHeaderView.m */; };
+		44DF61D51B09A8DE007C91A2 /* FYBEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF61D41B09A8DE007C91A2 /* FYBEntry.m */; };
+		44DF61D81B09A95A007C91A2 /* FYBPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF61D71B09A95A007C91A2 /* FYBPlayer.m */; };
 		44F44CA21B03557000AC25AC /* FYBBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F44CA11B03557000AC25AC /* FYBBaseViewController.m */; };
 		44F44CA71B03582B00AC25AC /* UIColor+Extended.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F44CA61B03582B00AC25AC /* UIColor+Extended.m */; };
 		B106A14BF9E6F0363E506D7B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CAEEA0C6A4CD1B8F9E7818D /* libPods.a */; };
@@ -62,6 +64,10 @@
 		44DF61CB1B099B4A007C91A2 /* FYBRound.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBRound.m; sourceTree = "<group>"; };
 		44DF61CE1B09A299007C91A2 /* FYBSectionHeaderView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBSectionHeaderView.h; sourceTree = "<group>"; };
 		44DF61CF1B09A299007C91A2 /* FYBSectionHeaderView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBSectionHeaderView.m; sourceTree = "<group>"; };
+		44DF61D31B09A8DE007C91A2 /* FYBEntry.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBEntry.h; sourceTree = "<group>"; };
+		44DF61D41B09A8DE007C91A2 /* FYBEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBEntry.m; sourceTree = "<group>"; };
+		44DF61D61B09A95A007C91A2 /* FYBPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBPlayer.h; sourceTree = "<group>"; };
+		44DF61D71B09A95A007C91A2 /* FYBPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBPlayer.m; sourceTree = "<group>"; };
 		44F44CA01B03557000AC25AC /* FYBBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBBaseViewController.h; sourceTree = "<group>"; };
 		44F44CA11B03557000AC25AC /* FYBBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBBaseViewController.m; sourceTree = "<group>"; };
 		44F44CA41B03579300AC25AC /* FYBScoring-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FYBScoring-Prefix.pch"; sourceTree = "<group>"; };
@@ -187,6 +193,10 @@
 			children = (
 				44DF61CA1B099B4A007C91A2 /* FYBRound.h */,
 				44DF61CB1B099B4A007C91A2 /* FYBRound.m */,
+				44DF61D31B09A8DE007C91A2 /* FYBEntry.h */,
+				44DF61D41B09A8DE007C91A2 /* FYBEntry.m */,
+				44DF61D61B09A95A007C91A2 /* FYBPlayer.h */,
+				44DF61D71B09A95A007C91A2 /* FYBPlayer.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -393,11 +403,13 @@
 				44DF61D01B09A299007C91A2 /* FYBSectionHeaderView.m in Sources */,
 				440B11321B0223B00060867A /* AppDelegate.m in Sources */,
 				44045C241B09753100312FB1 /* FYBScoreView.m in Sources */,
+				44DF61D51B09A8DE007C91A2 /* FYBEntry.m in Sources */,
 				44AFC7651B04CD730006218E /* FYBScoringTableViewController.m in Sources */,
 				44F44CA21B03557000AC25AC /* FYBBaseViewController.m in Sources */,
 				44683B621B055A20006AC0E0 /* FYBScoringCell.m in Sources */,
 				440B112F1B0223B00060867A /* main.m in Sources */,
 				44045C2A1B097DF000312FB1 /* FYBSharedConstants.m in Sources */,
+				44DF61D81B09A95A007C91A2 /* FYBPlayer.m in Sources */,
 				44F44CA71B03582B00AC25AC /* UIColor+Extended.m in Sources */,
 				440B114E1B0224490060867A /* FYBInitialViewController.m in Sources */,
 			);

@@ -34,7 +34,6 @@
     self.scoreViewArray = [NSMutableArray new];
     
     self.roundNumberLabel = [UILabel new];
-    self.roundNumberLabel.text = [@(self.roundNumber) stringValue];
     [self addSubview:self.roundNumberLabel];
 
     [self.roundNumberLabel mas_makeConstraints:^(MASConstraintMaker *make) {

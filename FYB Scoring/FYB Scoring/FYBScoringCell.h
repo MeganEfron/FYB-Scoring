@@ -11,7 +11,6 @@
 @interface FYBScoringCell : UITableViewCell
 
 @property (nonatomic) NSInteger amountOfPlayers;
-@property (nonatomic) NSInteger roundNumber;
 @property (nonatomic, strong) UILabel *roundNumberLabel;
 @property (strong, nonatomic) NSMutableArray *scoreViewArray;
 

@@ -23,11 +23,23 @@
 
 - (void)setup {
     
+    CGFloat viewWidthSize = (TableWidth - 50) / [self.players count];
+    
     for (NSInteger i = 0; i < [self.players count]; i++)
     {
+        UILabel* newLabel = [UILabel new];
+        newLabel.text = self.players[i];
+        newLabel.textAlignment = NSTextAlignmentCenter;
         
+        [self addSubview:newLabel];
+        
+        [newLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+            make.left.mas_equalTo(50 + (i * viewWidthSize));
+            make.width.mas_equalTo(viewWidthSize);
+            make.top.and.bottom.equalTo(self);
+            make.centerY.equalTo(self);
+        }];
     }
-    
 }
 
 @end

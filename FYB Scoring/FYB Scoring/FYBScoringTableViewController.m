@@ -10,6 +10,7 @@
 #import "UIColor+Extended.h"
 #import "FYBScoringCell.h"
 #import "FYBRound.h"
+#import "FYBSectionHeaderView.h"
 
 
 static NSString *const FYBPlayerNameCell = @"FYBPlayerNameCell";
@@ -66,14 +67,26 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
 - (void)configureCell:(FYBScoringCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     FYBRound *round = self.rounds[indexPath.row];
-    cell.roundNumberLabel.text = [@(round.roundNumber) stringValue];
+    cell.roundNumberLabel.text = [@(round.amountOfCards) stringValue];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {
     return nil;
 }
 
+- (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    FYBSectionHeaderView* headerView = [[FYBSectionHeaderView alloc] initWithPlayers:self.players];
+    
+    return headerView;
+}
 
+- (CGFloat)tableView:(UITableView *)tableView heightForHeaderInSection:(NSInteger)section {
+    return 50;
+}
+
+//- (CGFloat)tableView:(UITableView *)tableView estimatedHeightForHeaderInSection:(NSInteger)section {
+//    return 50;
+//}
 
 
 #pragma mark - Table View Delegate

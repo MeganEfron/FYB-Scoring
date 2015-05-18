@@ -10,6 +10,8 @@
 #import "UIColor+Extended.h"
 #import "FYBScoringTableViewController.h"
 #import "FYBRound.h"
+#import "FYBEntry.h"
+#import "FYBPlayer.h"
 
 @interface FYBInitialViewController ()
 
@@ -28,7 +30,12 @@
     
     [self setupView];
     
-    self.players = @[@"Megan", @"Brogan", @"Rodney", @"Lauri"];
+    FYBPlayer *player1 = [[FYBPlayer alloc] initWithName:@"Megan"];
+    FYBPlayer *player2 = [[FYBPlayer alloc] initWithName:@"Brogan"];
+    FYBPlayer *player3 = [[FYBPlayer alloc] initWithName:@"Rodney"];
+    FYBPlayer *player4 = [[FYBPlayer alloc] initWithName:@"Lauri"];
+    
+    self.players = @[player1, player2, player3, player4];
     self.amountOfRounds = 10;
     self.roundIndex = self.amountOfRounds + 1;
 }
@@ -82,6 +89,18 @@
 
 - (void)startGame {
     
+
+    NSArray *rounds = [self generateRounds];
+    
+    FYBScoringTableViewController *scoringSheetController = [[FYBScoringTableViewController alloc] initWithStyle:UITableViewStyleGrouped rounds:rounds];
+    scoringSheetController.players = self.players;
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:scoringSheetController];
+    
+    [self presentViewController:navController animated:YES completion:nil];
+}
+
+- (NSArray *)generateRounds {
     
     NSInteger totalRounds = (self.amountOfRounds - 1) * 2 + (int)[self.players count];
     
@@ -90,20 +109,32 @@
     
     // Create model
     for (NSInteger i = 0; i < totalRounds; i++) {
-        
+        // Creating new round
         FYBRound *newRound = [FYBRound new];
-        newRound.roundNumber = [self roundNumber:i];
+        
+        // Unique identifier of round (0 - total amount of rounds e.g. 22)
+        newRound.roundNumber = i;
+        
+        // Telling the round how many cards will be played
+        newRound.amountOfCards = [self roundNumber:i];
+        
+        // For each round, add an entry for each player
+        for (NSInteger j = 0; j < [self.players count]; j++)
+        {
+            FYBEntry *newEntry = [FYBEntry new];
+            newEntry.betValue = 0;
+            newEntry.madeValue = 0;
+            newEntry.player = self.players[i];
+            
+            [newRound.entries addObject:newEntry];
+        }
+        
+        // Add rounds to rounds array
         [rounds addObject:newRound];
-        NSLog(@"%@", [@(newRound.roundNumber) stringValue]);
     }
     
-    FYBScoringTableViewController *scoringSheetController = [[FYBScoringTableViewController alloc] initWithStyle:UITableViewStyleGrouped rounds:rounds];
-//    FYBScoringTableViewController *scoringSheetController = [[FYBScoringTableViewController alloc] initWithStyle:UITableViewStyleGrouped];
-    scoringSheetController.players = self.players;
     
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:scoringSheetController];
-    
-    [self presentViewController:navController animated:YES completion:nil];
+    return [rounds copy];
 }
 
 

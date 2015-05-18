@@ -12,4 +12,6 @@
 
 @property (nonatomic, strong) NSArray *players;
 
+- (instancetype)initWithPlayers:(NSArray*)players;
+
 @end
