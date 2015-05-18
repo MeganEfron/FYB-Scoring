@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		44045C241B09753100312FB1 /* FYBScoreView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44045C231B09753100312FB1 /* FYBScoreView.m */; };
+		44045C2A1B097DF000312FB1 /* FYBSharedConstants.m in Sources */ = {isa = PBXBuildFile; fileRef = 44045C291B097DF000312FB1 /* FYBSharedConstants.m */; };
 		440B112F1B0223B00060867A /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 440B112E1B0223B00060867A /* main.m */; };
 		440B11321B0223B00060867A /* AppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 440B11311B0223B00060867A /* AppDelegate.m */; };
 		440B11341B0223B00060867A /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 440B11331B0223B00060867A /* Images.xcassets */; };
@@ -34,6 +36,10 @@
 		0528A6F9D78532B55ADF0451 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
 		2CAEEA0C6A4CD1B8F9E7818D /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
 		3A72E6F2FC91EC4D0EB397C4 /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
+		44045C221B09753100312FB1 /* FYBScoreView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBScoreView.h; sourceTree = "<group>"; };
+		44045C231B09753100312FB1 /* FYBScoreView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBScoreView.m; sourceTree = "<group>"; };
+		44045C281B097DF000312FB1 /* FYBSharedConstants.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBSharedConstants.h; sourceTree = "<group>"; };
+		44045C291B097DF000312FB1 /* FYBSharedConstants.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBSharedConstants.m; sourceTree = "<group>"; };
 		440B11291B0223B00060867A /* FYB Scoring.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "FYB Scoring.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		440B112D1B0223B00060867A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		440B112E1B0223B00060867A /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
@@ -110,6 +116,8 @@
 		440B112C1B0223B00060867A /* Supporting Files */ = {
 			isa = PBXGroup;
 			children = (
+				44045C281B097DF000312FB1 /* FYBSharedConstants.h */,
+				44045C291B097DF000312FB1 /* FYBSharedConstants.m */,
 				44F44CA41B03579300AC25AC /* FYBScoring-Prefix.pch */,
 				440B11301B0223B00060867A /* AppDelegate.h */,
 				440B11311B0223B00060867A /* AppDelegate.m */,
@@ -163,6 +171,8 @@
 				44AFC7641B04CD730006218E /* FYBScoringTableViewController.m */,
 				44683B601B055A20006AC0E0 /* FYBScoringCell.h */,
 				44683B611B055A20006AC0E0 /* FYBScoringCell.m */,
+				44045C221B09753100312FB1 /* FYBScoreView.h */,
+				44045C231B09753100312FB1 /* FYBScoreView.m */,
 			);
 			name = "Scoring Sheet";
 			sourceTree = "<group>";
@@ -256,6 +266,7 @@
 		440B11211B0223B00060867A /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				CLASSPREFIX = FYB;
 				LastUpgradeCheck = 0630;
 				ORGANIZATIONNAME = "Megan Efron";
 				TargetAttributes = {
@@ -345,10 +356,12 @@
 			buildActionMask = 2147483647;
 			files = (
 				440B11321B0223B00060867A /* AppDelegate.m in Sources */,
+				44045C241B09753100312FB1 /* FYBScoreView.m in Sources */,
 				44AFC7651B04CD730006218E /* FYBScoringTableViewController.m in Sources */,
 				44F44CA21B03557000AC25AC /* FYBBaseViewController.m in Sources */,
 				44683B621B055A20006AC0E0 /* FYBScoringCell.m in Sources */,
 				440B112F1B0223B00060867A /* main.m in Sources */,
+				44045C2A1B097DF000312FB1 /* FYBSharedConstants.m in Sources */,
 				44F44CA71B03582B00AC25AC /* UIColor+Extended.m in Sources */,
 				440B114E1B0224490060867A /* FYBInitialViewController.m in Sources */,
 			);
@@ -472,7 +485,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "/Users/Megan/Documents/iOS Projects/FYB Scoring/FYB Scoring/FYBScoring-Prefix.pch";
+				GCC_PREFIX_HEADER = "/Users/Megan/Documents/iOS Projects/FYB-Scoring/FYB Scoring/FYB Scoring/FYBScoring-Prefix.pch";
 				INFOPLIST_FILE = "FYB Scoring/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
@@ -486,7 +499,7 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
-				GCC_PREFIX_HEADER = "/Users/Megan/Documents/iOS Projects/FYB Scoring/FYB Scoring/FYBScoring-Prefix.pch";
+				GCC_PREFIX_HEADER = "/Users/Megan/Documents/iOS Projects/FYB-Scoring/FYB Scoring/FYB Scoring/FYBScoring-Prefix.pch";
 				INFOPLIST_FILE = "FYB Scoring/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";

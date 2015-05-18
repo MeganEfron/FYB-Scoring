@@ -11,5 +11,8 @@
 @interface FYBScoringCell : UITableViewCell
 
 @property (nonatomic) NSInteger amountOfPlayers;
+@property (nonatomic, strong) UILabel *roundNumberLabel;
+
+- (instancetype)initWithAmountOfPlayers:(NSInteger)amountOfPlayers;
 
 @end

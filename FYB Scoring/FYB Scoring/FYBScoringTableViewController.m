@@ -7,6 +7,8 @@
 //
 
 #import "FYBScoringTableViewController.h"
+#import "UIColor+Extended.h"
+#import "FYBScoringCell.h"
 
 
 static NSString *const FYBPlayerNameCell = @"FYBPlayerNameCell";
@@ -34,45 +36,27 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
 #pragma mark - Table View Data Source
 
 - (NSInteger)numberOfSectionsInTableView:(UITableView *)tableView {
-    return 2;
+    return 1;
 }
 
 - (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    
-    if (section == 0)
-    {
-        return 1;
-    }
-    
-    else
-    {
+
         return (NSInteger)self.totalRounds;
-    }
 }
 
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    UITableViewCell *cell;
+    FYBScoringCell *cell;
     
-    if (indexPath.section == 0)
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:FYBPlayerNameCell];
+    cell = [[FYBScoringCell alloc] initWithAmountOfPlayers:[self.players count]];
     
-        [self configureCell:cell atIndexPath:indexPath];
-    }
-    else
-    {
-        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:FYBScoreCell];
-        
-        [self configureCell:cell atIndexPath:indexPath];
-    }
+    [self configureCell:cell atIndexPath:indexPath];
     
     return cell;
 }
 
-- (void)configureCell:(UITableViewCell *)cell atIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.section == 1)
-        cell.textLabel.text = [NSString stringWithFormat:@"%li", (long)indexPath.row];
+- (void)configureCell:(FYBScoringCell *)cell atIndexPath:(NSIndexPath *)indexPath {
+    cell.roundNumberLabel.text = [@(indexPath.row) stringValue];
 }
 
 - (NSString *)tableView:(UITableView *)tableView titleForHeaderInSection:(NSInteger)section {

@@ -14,4 +14,6 @@
 
 + (UIColor*)backgroundColor;
 
++ (UIColor*)randomColor;
+
 @end
