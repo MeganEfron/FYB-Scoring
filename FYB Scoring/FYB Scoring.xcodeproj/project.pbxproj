@@ -21,6 +21,7 @@
 		44DF61D01B09A299007C91A2 /* FYBSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF61CF1B09A299007C91A2 /* FYBSectionHeaderView.m */; };
 		44DF61D51B09A8DE007C91A2 /* FYBEntry.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF61D41B09A8DE007C91A2 /* FYBEntry.m */; };
 		44DF61D81B09A95A007C91A2 /* FYBPlayer.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF61D71B09A95A007C91A2 /* FYBPlayer.m */; };
+		44DF61DC1B09D297007C91A2 /* FYBGameManager.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF61DB1B09D297007C91A2 /* FYBGameManager.m */; };
 		44F44CA21B03557000AC25AC /* FYBBaseViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F44CA11B03557000AC25AC /* FYBBaseViewController.m */; };
 		44F44CA71B03582B00AC25AC /* UIColor+Extended.m in Sources */ = {isa = PBXBuildFile; fileRef = 44F44CA61B03582B00AC25AC /* UIColor+Extended.m */; };
 		B106A14BF9E6F0363E506D7B /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 2CAEEA0C6A4CD1B8F9E7818D /* libPods.a */; };
@@ -68,6 +69,8 @@
 		44DF61D41B09A8DE007C91A2 /* FYBEntry.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBEntry.m; sourceTree = "<group>"; };
 		44DF61D61B09A95A007C91A2 /* FYBPlayer.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBPlayer.h; sourceTree = "<group>"; };
 		44DF61D71B09A95A007C91A2 /* FYBPlayer.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBPlayer.m; sourceTree = "<group>"; };
+		44DF61DA1B09D297007C91A2 /* FYBGameManager.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBGameManager.h; sourceTree = "<group>"; };
+		44DF61DB1B09D297007C91A2 /* FYBGameManager.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBGameManager.m; sourceTree = "<group>"; };
 		44F44CA01B03557000AC25AC /* FYBBaseViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBBaseViewController.h; sourceTree = "<group>"; };
 		44F44CA11B03557000AC25AC /* FYBBaseViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBBaseViewController.m; sourceTree = "<group>"; };
 		44F44CA41B03579300AC25AC /* FYBScoring-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "FYBScoring-Prefix.pch"; sourceTree = "<group>"; };
@@ -229,6 +232,15 @@
 			name = "Score View";
 			sourceTree = "<group>";
 		};
+		44DF61DD1B09D299007C91A2 /* Singletons */ = {
+			isa = PBXGroup;
+			children = (
+				44DF61DA1B09D297007C91A2 /* FYBGameManager.h */,
+				44DF61DB1B09D297007C91A2 /* FYBGameManager.m */,
+			);
+			name = Singletons;
+			sourceTree = "<group>";
+		};
 		44F44CA31B03557300AC25AC /* Reuse */ = {
 			isa = PBXGroup;
 			children = (
@@ -241,6 +253,7 @@
 		44F44CA81B03583300AC25AC /* Utilities */ = {
 			isa = PBXGroup;
 			children = (
+				44DF61DD1B09D299007C91A2 /* Singletons */,
 				44F44CA91B03583900AC25AC /* Categories */,
 			);
 			name = Utilities;
@@ -410,6 +423,7 @@
 				44DF61CC1B099B4A007C91A2 /* FYBRound.m in Sources */,
 				44DF61D01B09A299007C91A2 /* FYBSectionHeaderView.m in Sources */,
 				440B11321B0223B00060867A /* AppDelegate.m in Sources */,
+				44DF61DC1B09D297007C91A2 /* FYBGameManager.m in Sources */,
 				44045C241B09753100312FB1 /* FYBScoreView.m in Sources */,
 				44DF61D51B09A8DE007C91A2 /* FYBEntry.m in Sources */,
 				44AFC7651B04CD730006218E /* FYBScoringTableViewController.m in Sources */,

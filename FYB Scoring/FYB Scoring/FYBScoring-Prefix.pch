@@ -12,5 +12,6 @@
 #import <Masonry/Masonry.h>
 
 #import "FYBSharedConstants.h"
+#import "FYBGameManager.h"
 
 #endif

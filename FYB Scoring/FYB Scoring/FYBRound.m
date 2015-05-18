@@ -10,4 +10,11 @@
 
 @implementation FYBRound
 
+- (NSMutableArray *)entries {
+    if (!_entries) {
+        _entries = [NSMutableArray new];
+    }
+    return _entries;
+}
+
 @end

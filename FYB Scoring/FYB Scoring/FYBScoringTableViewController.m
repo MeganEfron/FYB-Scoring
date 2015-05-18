@@ -39,7 +39,7 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
         self.rounds = rounds;
         self.players = players;
         
-        self.currentRound = 0;
+        self.currentRound = 5;
     }
     return self;
 }
@@ -89,6 +89,12 @@ static NSString *const FYBScoreCell = @"FYBScoreCell";
     cell.roundNumberLabel.text = [@(round.amountOfCards) stringValue];
     [cell colorStartingPlayer:round.startingPlayer];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
+    
+    // Setting all values after current round not able to played
+    if (indexPath.row > self.currentRound) {
+        cell.backgroundColor = [UIColor grayColor];
+        cell.userInteractionEnabled = NO;
+    }
     
 }
 
