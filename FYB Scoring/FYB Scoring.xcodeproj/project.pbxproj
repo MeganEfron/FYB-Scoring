@@ -17,6 +17,7 @@
 		440B114E1B0224490060867A /* FYBInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440B114D1B0224490060867A /* FYBInitialViewController.m */; };
 		44683B621B055A20006AC0E0 /* FYBScoringCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44683B611B055A20006AC0E0 /* FYBScoringCell.m */; };
 		447652361B0AD7E500EF1F65 /* FYBAddPlayerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 447652351B0AD7E500EF1F65 /* FYBAddPlayerTableViewController.m */; };
+		447652391B0AFB7100EF1F65 /* FYBPlayer+Extended.m in Sources */ = {isa = PBXBuildFile; fileRef = 447652381B0AFB7100EF1F65 /* FYBPlayer+Extended.m */; };
 		44AFC7651B04CD730006218E /* FYBScoringTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 44AFC7641B04CD730006218E /* FYBScoringTableViewController.m */; };
 		44DF61CC1B099B4A007C91A2 /* FYBRound.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF61CB1B099B4A007C91A2 /* FYBRound.m */; };
 		44DF61D01B09A299007C91A2 /* FYBSectionHeaderView.m in Sources */ = {isa = PBXBuildFile; fileRef = 44DF61CF1B09A299007C91A2 /* FYBSectionHeaderView.m */; };
@@ -62,6 +63,8 @@
 		44683B611B055A20006AC0E0 /* FYBScoringCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBScoringCell.m; sourceTree = "<group>"; };
 		447652341B0AD7E500EF1F65 /* FYBAddPlayerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBAddPlayerTableViewController.h; sourceTree = "<group>"; };
 		447652351B0AD7E500EF1F65 /* FYBAddPlayerTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBAddPlayerTableViewController.m; sourceTree = "<group>"; };
+		447652371B0AFB7100EF1F65 /* FYBPlayer+Extended.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = "FYBPlayer+Extended.h"; sourceTree = "<group>"; };
+		447652381B0AFB7100EF1F65 /* FYBPlayer+Extended.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = "FYBPlayer+Extended.m"; sourceTree = "<group>"; };
 		44AFC7631B04CD730006218E /* FYBScoringTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBScoringTableViewController.h; sourceTree = "<group>"; };
 		44AFC7641B04CD730006218E /* FYBScoringTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBScoringTableViewController.m; sourceTree = "<group>"; };
 		44DF61CA1B099B4A007C91A2 /* FYBRound.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBRound.h; sourceTree = "<group>"; };
@@ -205,6 +208,8 @@
 				44DF61D41B09A8DE007C91A2 /* FYBEntry.m */,
 				44DF61D61B09A95A007C91A2 /* FYBPlayer.h */,
 				44DF61D71B09A95A007C91A2 /* FYBPlayer.m */,
+				447652371B0AFB7100EF1F65 /* FYBPlayer+Extended.h */,
+				447652381B0AFB7100EF1F65 /* FYBPlayer+Extended.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -434,6 +439,7 @@
 				44AFC7651B04CD730006218E /* FYBScoringTableViewController.m in Sources */,
 				44F44CA21B03557000AC25AC /* FYBBaseViewController.m in Sources */,
 				44683B621B055A20006AC0E0 /* FYBScoringCell.m in Sources */,
+				447652391B0AFB7100EF1F65 /* FYBPlayer+Extended.m in Sources */,
 				440B112F1B0223B00060867A /* main.m in Sources */,
 				44045C2A1B097DF000312FB1 /* FYBSharedConstants.m in Sources */,
 				44DF61D81B09A95A007C91A2 /* FYBPlayer.m in Sources */,

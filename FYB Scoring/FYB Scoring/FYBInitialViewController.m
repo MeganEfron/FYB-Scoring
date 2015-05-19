@@ -16,9 +16,9 @@
 
 static NSInteger const CellHeight = 50;
 static NSInteger const MinimumPlayers = 3;
-static NSInteger const MaximumPlayers = 10;
+static NSInteger const MaximumPlayers = 7;
 static NSInteger const MinimumRounds = 3;
-static NSInteger const MaximumRounds = 13;
+static NSInteger const MaximumRounds = 15;
 
 @interface FYBInitialViewController ()      <UITableViewDataSource, UITableViewDelegate>
 
@@ -162,7 +162,8 @@ static NSInteger const MaximumRounds = 13;
     
     
     [self.roundStepper mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.centerX.equalTo(superView).with.offset(70);
+//        make.centerX.equalTo(superView).with.offset(70);
+        make.left.equalTo(self.roundLabel.mas_right).with.offset(20);
         make.centerY.equalTo(roundsLabel);
     }];
     
