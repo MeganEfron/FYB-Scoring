@@ -45,10 +45,6 @@ static NSInteger const MaximumRounds = 15;
     
     self.players = [NSMutableArray new];
     
-//    [self.players addObject:[[FYBPlayer alloc] initWithName:@"Megan"]];
-//    [self.players addObject:[[FYBPlayer alloc] initWithName:@"Brogan"]];
-//    [self.players addObject:[[FYBPlayer alloc] initWithName:@"Lauri"]];
-    
     self.amountOfRounds = 10;
 
     [self setupView];
@@ -286,7 +282,7 @@ static NSInteger const MaximumRounds = 15;
     [self.view setNeedsUpdateConstraints];
     [self.view updateConstraintsIfNeeded];
     
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.3 animations:^{
         
         [self.view layoutIfNeeded];
     }];

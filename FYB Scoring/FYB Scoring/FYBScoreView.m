@@ -11,6 +11,7 @@
 #import "FYBEntry.h"
 #import "FYBPlayer.h"
 #import "FYBScoringTableViewController.h"
+#import "FYBPlayer+Extended.h"
 
 @interface FYBScoreView ()  <UITextFieldDelegate>
 
@@ -122,15 +123,21 @@
         if (previousBet && previousMade)
         {
             NSInteger scoreToSubtract = -[self calculateScoreFromBet:previousBet made:previousMade];
-            [self.entry.player addToScore:scoreToSubtract];
+            
+            NSInteger score = [self.entry.player.score integerValue];
+            
+            score += scoreToSubtract;
+            
+            self.entry.player.score = @(score);
         }
         
         NSInteger scoreToAdd = [self calculateScoreFromBet:self.entry.betValue made:self.entry.madeValue];
         
         [self.entry.player addToScore:scoreToAdd];
-        self.entry.scoreForEntry = self.entry.player.score;
+        self.entry.scoreForEntry = [self.entry.player.score integerValue];
         
-        self.scoreLabel.text = [@(self.entry.player.score) stringValue];
+        self.scoreLabel.text = [@(self.entry.scoreForEntry) stringValue];
+//        self.scoreLabel.text = [@(self.entry.player.score) stringValue];
     }
     
     if ([[FYBGameManager sharedManager] isRoundFinished:self.entry.round])

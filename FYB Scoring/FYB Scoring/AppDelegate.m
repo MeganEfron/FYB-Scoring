@@ -20,6 +20,8 @@
     self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
     self.window.backgroundColor = [UIColor whiteColor];
     
+    [MagicalRecord setupCoreDataStack];
+    
     UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:[FYBInitialViewController new]];
     
     self.window.rootViewController = navController;

@@ -9,9 +9,12 @@
 #ifndef FYB_Scoring_FYBScoring_Prefix_pch
 #define FYB_Scoring_FYBScoring_Prefix_pch
 
-#import <Masonry/Masonry.h>
+    // 3rd party
+    #import <Masonry/Masonry.h>
+    #import <MagicalRecord/CoreData+MagicalRecord.h>
 
-#import "FYBSharedConstants.h"
-#import "FYBGameManager.h"
+    // Utilities
+    #import "FYBSharedConstants.h"
+    #import "FYBGameManager.h"
 
 #endif
