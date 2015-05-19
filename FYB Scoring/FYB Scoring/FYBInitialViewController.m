@@ -52,6 +52,9 @@ static NSInteger const MaximumRounds = 15;
 
 - (void)setupView {
     
+//    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
+    
     // ----- Setting up screen -----
     self.title = @"FYB GAME DETAILS";
     
@@ -164,6 +167,10 @@ static NSInteger const MaximumRounds = 15;
     }];
     
     
+}
+
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [self.playerTableView setEditing:editing animated:animated];
 }
 
 
@@ -324,6 +331,7 @@ static NSInteger const MaximumRounds = 15;
     if (indexPath.row < [self.players count]) {
         FYBPlayer *player = [self.players objectAtIndex:indexPath.row];
         cell.textLabel.text = player.name;
+        cell.showsReorderControl = YES;
     }
     
     else {
@@ -344,6 +352,16 @@ static NSInteger const MaximumRounds = 15;
     
     return cell;
 }
+
+//- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+//    
+//}
+//
+//
+//
+//- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return YES;
+//}
 
 
 #pragma mark - Table View Delegate
