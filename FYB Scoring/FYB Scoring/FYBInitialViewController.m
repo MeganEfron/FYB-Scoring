@@ -15,6 +15,10 @@
 #import "FYBAddPlayerTableViewController.h"
 
 static NSInteger const CellHeight = 50;
+static NSInteger const MinimumPlayers = 3;
+static NSInteger const MaximumPlayers = 10;
+static NSInteger const MinimumRounds = 3;
+static NSInteger const MaximumRounds = 13;
 
 @interface FYBInitialViewController ()      <UITableViewDataSource, UITableViewDelegate>
 
@@ -103,8 +107,8 @@ static NSInteger const CellHeight = 50;
     self.roundStepper = [UIStepper new];
     self.roundStepper.continuous = NO;
     self.roundStepper.value = self.amountOfRounds;
-    self.roundStepper.minimumValue = 3;
-    self.roundStepper.maximumValue = 13;
+    self.roundStepper.minimumValue = MinimumRounds;
+    self.roundStepper.maximumValue = MaximumRounds;
     self.roundStepper.tintColor = [UIColor whiteColor];
     [self.roundStepper addTarget:self action:@selector(updateRound:) forControlEvents:UIControlEventValueChanged];
     [superView addSubview:self.roundStepper];
@@ -179,7 +183,7 @@ static NSInteger const CellHeight = 50;
 
 - (void)startGame {
     
-    if ([self.players count] > 2 && [self.players count] < 7)
+    if ([self.players count] >= MinimumPlayers && [self.players count] <= MaximumPlayers)
     {
         self.roundIndex = self.amountOfRounds + 1;
         NSArray *rounds = [self generateRounds];
@@ -195,7 +199,7 @@ static NSInteger const CellHeight = 50;
     else
     {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid amount of players"
-                                                                       message:@"There must be between 3 to 6 players"
+                                                                       message:@"There must be between 3 to 10 players"
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
@@ -312,20 +316,6 @@ static NSInteger const CellHeight = 50;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseIdentifier];
 
-    
-//    if (indexPath.row < [self.players count]) {
-//        FYBPlayer *player = [self.players objectAtIndex:indexPath.row];
-//        cell.textLabel.text = player.name;
-//    }
-//    
-//    else {
-//        if ([self.players count] < 3)
-//            cell.textLabel.textColor = self.colorToUse;
-//        else
-//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
-//        cell.textLabel.text = @"Add";
-//        cell.textLabel.textAlignment = NSTextAlignmentCenter;
-//    }
     [self configureCell:cell forIndexPath:indexPath];
     
     return cell;
@@ -341,7 +331,7 @@ static NSInteger const CellHeight = 50;
     
     else {
         
-        if ([self.players count] < 6)
+        if ([self.players count] < MaximumPlayers)
         {
             cell.textLabel.textColor = self.colorToUse;
         }
@@ -390,7 +380,7 @@ static NSInteger const CellHeight = 50;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == [self.players count] && [self.players count] < 6) {
+    if (indexPath.row == [self.players count] && [self.players count] < MaximumPlayers) {
         [self displayAddPlayerView];
     }
 }
