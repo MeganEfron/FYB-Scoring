@@ -66,20 +66,23 @@ static NSInteger const CellHeight = 50;
     // Creating Player Table Label
     UILabel *tableLabel = [UILabel new];
     tableLabel.text = @"PLAYERS";
+    tableLabel.font = [UIFont systemFontOfSize:25];
     tableLabel.textColor = [UIColor defaultTextColor];
-    tableLabel.numberOfLines = 2;
     [superView addSubview:tableLabel];
+    
+    // Creating table description label
+    UILabel *tableDescLabel = [UILabel new];
+    tableDescLabel.text = @"Set players names in order they are sitting around the table, starting with first better";
+    tableDescLabel.font = [UIFont systemFontOfSize:15];
+    tableDescLabel.textColor = [UIColor defaultTextColor];
+    tableDescLabel.numberOfLines = 2;
+    [superView addSubview:tableDescLabel];
 
     // Create button to start game
     UIButton* startGameButton = [UIButton buttonWithType:UIButtonTypeSystem];
-    
-    // Set button action to present scoring sheet view controller
     [startGameButton addTarget:self action:@selector(startGame) forControlEvents:UIControlEventTouchUpInside];
-    
-    // Setting button title to Start New Game
-    [startGameButton setTitle:@"Start New Game" forState:UIControlStateNormal];
-    
-    // Setting button's color to white
+    [startGameButton setTitle:@"START GAME" forState:UIControlStateNormal];
+    startGameButton.titleLabel.font = [UIFont systemFontOfSize:20];
     [startGameButton setTintColor:[UIColor defaultTextColor]];
     
     // Adding button to superview
@@ -94,14 +97,19 @@ static NSInteger const CellHeight = 50;
         make.centerX.equalTo(superView);
         make.left.equalTo(superView).with.offset(50);
         make.right.equalTo(superView).with.offset(-50);
-        make.top.equalTo(superView).with.offset(100);
+        make.top.equalTo(superView).with.offset(120);
         make.height.mas_equalTo(CellHeight * ([self.players count] + 1));
     }];
 
     // Table label constraints
     [tableLabel mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.bottom.equalTo(self.playerTableView.mas_top).with.offset(-20);
+        make.bottom.equalTo(tableDescLabel.mas_top).with.offset(-20);
         make.left.equalTo(self.playerTableView).with.offset(20);
+    }];
+    
+    [tableDescLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(self.playerTableView);
+        make.bottom.equalTo(self.playerTableView.mas_top).with.offset(-10);
     }];
 
     // Start game button constraints
@@ -216,5 +224,9 @@ static NSInteger const CellHeight = 50;
     return CellHeight;
 }
 
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+}
 
 @end
