@@ -8,6 +8,10 @@
 
 #import <UIKit/UIKit.h>
 
+@class FYBPlayer;
+
 @interface FYBAddPlayerTableViewController : UITableViewController
+
+@property (nonatomic, copy) void (^newPlayerSelected)(FYBPlayer *newPlayer);
 
 @end

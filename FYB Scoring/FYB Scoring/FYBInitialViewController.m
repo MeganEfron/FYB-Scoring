@@ -12,7 +12,6 @@
 #import "FYBRound.h"
 #import "FYBEntry.h"
 #import "FYBPlayer.h"
-#import "FYBAddPlayerViewController.h"
 #import "FYBAddPlayerTableViewController.h"
 
 static NSInteger const CellHeight = 50;
@@ -22,6 +21,7 @@ static NSInteger const CellHeight = 50;
 @property (nonatomic, strong) NSMutableArray *players;
 @property (nonatomic) NSInteger amountOfRounds;
 @property (nonatomic) NSInteger roundIndex;
+@property (nonatomic, strong) UIColor *colorToUse;
 
 // Views
 @property (nonatomic, strong) UITableView *playerTableView;
@@ -35,12 +35,9 @@ static NSInteger const CellHeight = 50;
     
     [super viewDidLoad];
     
-    FYBPlayer *player1 = [[FYBPlayer alloc] initWithName:@"Megan"];
-    FYBPlayer *player2 = [[FYBPlayer alloc] initWithName:@"Brogan"];
-    FYBPlayer *player3 = [[FYBPlayer alloc] initWithName:@"Rodney"];
-    FYBPlayer *player4 = [[FYBPlayer alloc] initWithName:@"Lauri"];
+    self.colorToUse = self.view.tintColor;
     
-    self.players = [[NSMutableArray alloc] initWithArray:@[player1, player2, player3, player4]];
+    self.players = [NSMutableArray new];
     
     self.amountOfRounds = 10;
     self.roundIndex = self.amountOfRounds + 1;
@@ -63,7 +60,7 @@ static NSInteger const CellHeight = 50;
     self.playerTableView.dataSource = self;
     self.playerTableView.delegate = self;
     self.playerTableView.bounces = NO;
-    self.playerTableView.layer.cornerRadius = 8.0;
+    self.playerTableView.layer.cornerRadius = 5.0;
     [superView addSubview:self.playerTableView];
 
 
@@ -247,8 +244,8 @@ static NSInteger const CellHeight = 50;
         FYBPlayer *player = [self.players objectAtIndex:indexPath.row];
         cell.textLabel.text = player.name;
     } else {
+        cell.textLabel.textColor = self.colorToUse;
         cell.textLabel.text = @"Add";
-        cell.textLabel.textColor = self.view.tintColor;
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
     }
     
@@ -298,13 +295,31 @@ static NSInteger const CellHeight = 50;
 
 - (void) displayAddPlayerView {
     FYBAddPlayerTableViewController* addPlayerController = [[FYBAddPlayerTableViewController alloc] initWithStyle:UITableViewStylePlain];
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:addPlayerController];
     
-//    FYBAddPlayerViewController *addPlayerController = [FYBAddPlayerViewController new];
+    addPlayerController.newPlayerSelected = ^(FYBPlayer *newPlayer) {
+        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.players count] inSection:0];
+        [self.playerTableView deselectRowAtIndexPath:indexPath animated:YES];
+        
+        [self.players addObject:newPlayer];
+        
+        [self.playerTableView beginUpdates];
+        [self.playerTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        [self.playerTableView endUpdates];
+        
+        [self refreshPlayerTable];
+        
+        
+        [self dismissViewControllerAnimated:YES completion:nil];
+    };
+    
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:addPlayerController];
     
     navController.modalPresentationStyle = UIModalPresentationFormSheet;
     
     [self presentViewController:navController animated:YES completion:nil];
 }
+
+
+
 
 @end
