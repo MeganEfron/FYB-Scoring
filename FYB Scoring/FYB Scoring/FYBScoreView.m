@@ -49,6 +49,8 @@
     
     // Setting the font of the score to be larger than the text fields
     self.scoreLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize] + 7];
+    self.madeTextField.font = [UIFont systemFontOfSize:12];
+    self.betTextField.font = [UIFont systemFontOfSize:12];
     
     // Adding targets to text fields
     self.betTextField.delegate = self;
@@ -74,13 +76,13 @@
     // -------------- View Constraints --------------
     
     [self.betTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self).with.offset(5);
+        make.left.equalTo(self).with.offset(3);
         make.height.equalTo(self);
         make.width.mas_equalTo(@30);
     }];
     
     [self.madeTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self).with.offset(-5);
+        make.right.equalTo(self).with.offset(-3);
         make.height.equalTo(self);
         make.width.mas_equalTo(@30);
     }];
@@ -93,9 +95,6 @@
 }
 
 
-
-// REMEMBER HERE TO MAKE SURE IF THE VALUE OF THE TEXT FIELD DIDN'T ACTUALLY CHANGE, TO NOT ADD THE SCORE TO THE PLAYERS SCORE
-// OR IF THE VALUE IS CHANGED, TO REVERT THE SCORE TO THE SCORE BEFORE
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -137,7 +136,6 @@
         self.entry.scoreForEntry = [self.entry.player.score integerValue];
         
         self.scoreLabel.text = [@(self.entry.scoreForEntry) stringValue];
-//        self.scoreLabel.text = [@(self.entry.player.score) stringValue];
     }
     
     if ([[FYBGameManager sharedManager] isRoundFinished:self.entry.round])

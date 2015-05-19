@@ -12,9 +12,9 @@
 
 @interface FYBAddPlayerTableViewController ()
 
-//@property (strong, nonatomic) NSMutableArray *allPlayers;
-
 @end
+
+
 
 @implementation FYBAddPlayerTableViewController
 
@@ -30,8 +30,6 @@
     self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
                                                                                           target:self
                                                                                           action:@selector(cancel)];
-    
-//    self.allPlayers = [NSMutableArray new];
     
     self.fetchedResultsController = [FYBPlayer MR_fetchAllSortedBy:nil
                                                          ascending:YES
@@ -59,6 +57,7 @@
     }];
     
     [alert addTextFieldWithConfigurationHandler:^(UITextField *textField) {
+        textField.autocapitalizationType = UITextAutocapitalizationTypeWords;
         textField.placeholder = @"Player name";
     }];
     

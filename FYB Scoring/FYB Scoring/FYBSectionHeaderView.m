@@ -32,6 +32,7 @@
         FYBPlayer *player = self.players[i];
         newLabel.text = player.name;
         newLabel.textAlignment = NSTextAlignmentCenter;
+        newLabel.font = [UIFont systemFontOfSize:20];
         
         [self addSubview:newLabel];
         

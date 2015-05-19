@@ -47,6 +47,8 @@
 - (void)viewDidLoad {
     
     self.title = @"SCORING";
+    
+    
 }
 
 
@@ -87,7 +89,6 @@
 
 
 
-
 - (void)configureCell:(FYBScoringCell *)cell atIndexPath:(NSIndexPath *)indexPath {
     
     FYBRound *round = self.rounds[indexPath.row];
@@ -96,12 +97,11 @@
     
 //    Setting all values after current round not able to played
     if (indexPath.row != [[FYBGameManager sharedManager] getCurrentRound]) {
-        cell.backgroundColor = [UIColor colorWithWhite:0.938 alpha:1.000];
+        cell.backgroundColor = [UIColor colorWithWhite:0.95 alpha:1.000];
         cell.userInteractionEnabled = NO;
     }
-    else {
-        [cell colorStartingPlayer:round.startingPlayer];
-    }
+
+    [cell colorStartingPlayer:round.startingPlayer];
 }
 
 
@@ -109,6 +109,7 @@
 
 
 - (UIView *)tableView:(UITableView *)tableView viewForHeaderInSection:(NSInteger)section {
+    
     FYBSectionHeaderView* headerView = [[FYBSectionHeaderView alloc] initWithPlayers:self.players];
     
     return headerView;

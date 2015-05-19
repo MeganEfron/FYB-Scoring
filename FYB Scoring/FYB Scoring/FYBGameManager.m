@@ -34,13 +34,24 @@ static NSInteger CurrentRound = 0;
     for (NSInteger i = 0; i < [round.entries count]; i++)
     {
         FYBEntry *entry = round.entries[i];
-        if (!entry.betValue)
-            isRoundFinished = NO;
-        if (!entry.madeValue)
+        if (![self isEntryFinished:entry])
             isRoundFinished = NO;
     }
     
     return isRoundFinished;
+}
+
+
+- (BOOL) isEntryFinished:(FYBEntry *)entry {
+    BOOL isEntryFinished = YES;
+    
+    if (!entry.betValue)
+        isEntryFinished = NO;
+    
+    if (!entry.madeValue)
+        isEntryFinished = NO;
+
+    return isEntryFinished;
 }
 
 
