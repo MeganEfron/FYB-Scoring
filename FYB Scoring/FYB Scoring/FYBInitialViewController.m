@@ -12,6 +12,8 @@
 #import "FYBRound.h"
 #import "FYBEntry.h"
 #import "FYBPlayer.h"
+#import "FYBAddPlayerViewController.h"
+#import "FYBAddPlayerTableViewController.h"
 
 static NSInteger const CellHeight = 50;
 
@@ -60,6 +62,8 @@ static NSInteger const CellHeight = 50;
     self.playerTableView = [UITableView new];
     self.playerTableView.dataSource = self;
     self.playerTableView.delegate = self;
+    self.playerTableView.bounces = NO;
+    self.playerTableView.layer.cornerRadius = 8.0;
     [superView addSubview:self.playerTableView];
 
 
@@ -72,7 +76,7 @@ static NSInteger const CellHeight = 50;
     
     // Creating table description label
     UILabel *tableDescLabel = [UILabel new];
-    tableDescLabel.text = @"Set players names in order they are sitting around the table, starting with first better";
+    tableDescLabel.text = @"Set players names in order they are sitting around the table, starting with the first better";
     tableDescLabel.font = [UIFont systemFontOfSize:15];
     tableDescLabel.textColor = [UIColor defaultTextColor];
     tableDescLabel.numberOfLines = 2;
@@ -98,7 +102,8 @@ static NSInteger const CellHeight = 50;
         make.left.equalTo(superView).with.offset(50);
         make.right.equalTo(superView).with.offset(-50);
         make.top.equalTo(superView).with.offset(120);
-        make.height.mas_equalTo(CellHeight * ([self.players count] + 1));
+        make.height.mas_equalTo(CellHeight).with.offset(CellHeight * ([self.players count] + 1));
+//        make.height.mas_equalTo(CellHeight * ([self.players count] + 1));
     }];
 
     // Table label constraints
@@ -196,6 +201,35 @@ static NSInteger const CellHeight = 50;
 }
 
 
+#pragma mark - Resizing Player Table
+
+- (void)refreshPlayerTable {
+    
+    // Update table
+//    [self.playerTableView reloadData];
+
+    // Ensure table is sized to fit
+    [self.view setNeedsUpdateConstraints];
+    [self.view updateConstraintsIfNeeded];
+    
+    [UIView animateWithDuration:0.5 animations:^{
+        
+        [self.view layoutIfNeeded];
+    }];
+    
+}
+
+- (void)updateViewConstraints {
+    
+    [self.playerTableView mas_updateConstraints:^(MASConstraintMaker *make) {
+        
+        make.height.mas_equalTo(CellHeight).with.offset(CellHeight * ([self.players count] + 1));
+        
+    }];
+    
+    [super updateViewConstraints];
+}
+
 
 
 #pragma mark - Table View Data Source
@@ -212,6 +246,10 @@ static NSInteger const CellHeight = 50;
     if (indexPath.row < [self.players count]) {
         FYBPlayer *player = [self.players objectAtIndex:indexPath.row];
         cell.textLabel.text = player.name;
+    } else {
+        cell.textLabel.text = @"Add";
+        cell.textLabel.textColor = self.view.tintColor;
+        cell.textLabel.textAlignment = NSTextAlignmentCenter;
     }
     
     return cell;
@@ -225,8 +263,48 @@ static NSInteger const CellHeight = 50;
 }
 
 
-- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+- (void)tableView:(UITableView *)tableView commitEditingStyle:(UITableViewCellEditingStyle)editingStyle forRowAtIndexPath:(NSIndexPath *)indexPath {
     
+    [self.playerTableView beginUpdates];
+    
+    if (editingStyle == UITableViewCellEditingStyleDelete) {
+        
+        [self.players removeObjectAtIndex:indexPath.row];
+        [self.playerTableView deleteRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+        
+        [self refreshPlayerTable];
+    }
+    
+    [self.playerTableView endUpdates];
+}
+
+- (BOOL)tableView:(UITableView *)tableView canEditRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row < [self.players count])
+        return YES;
+    
+    return NO;
+}
+
+- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
+    
+    if (indexPath.row == [self.players count]) {
+        [self displayAddPlayerView];
+    }
+}
+
+
+
+#pragma mark - Adding player
+
+- (void) displayAddPlayerView {
+    FYBAddPlayerTableViewController* addPlayerController = [[FYBAddPlayerTableViewController alloc] initWithStyle:UITableViewStylePlain];
+    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:addPlayerController];
+    
+//    FYBAddPlayerViewController *addPlayerController = [FYBAddPlayerViewController new];
+    
+    navController.modalPresentationStyle = UIModalPresentationFormSheet;
+    
+    [self presentViewController:navController animated:YES completion:nil];
 }
 
 @end
