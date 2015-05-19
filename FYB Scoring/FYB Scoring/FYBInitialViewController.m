@@ -67,6 +67,7 @@ static NSInteger const CellHeight = 50;
     UILabel *tableLabel = [UILabel new];
     tableLabel.text = @"PLAYERS";
     tableLabel.textColor = [UIColor defaultTextColor];
+    tableLabel.numberOfLines = 2;
     [superView addSubview:tableLabel];
 
     // Create button to start game
@@ -167,9 +168,8 @@ static NSInteger const CellHeight = 50;
         for (NSInteger j = 0; j < [self.players count]; j++)
         {
             FYBEntry *newEntry = [FYBEntry new];
-            newEntry.betValue = 0;
-            newEntry.madeValue = 0;
             newEntry.player = self.players[j];
+            newEntry.round = newRound;
             
             [newRound.entries addObject:newEntry];
         }

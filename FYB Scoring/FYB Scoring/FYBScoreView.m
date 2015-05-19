@@ -133,6 +133,12 @@
         self.scoreLabel.text = [@(self.entry.player.score) stringValue];
     }
     
+    if ([[FYBGameManager sharedManager] isRoundFinished:self.entry.round])
+    {
+        [[FYBGameManager sharedManager] nextRound];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNextRound object:nil];
+    }
+    
     return YES;
 }
 

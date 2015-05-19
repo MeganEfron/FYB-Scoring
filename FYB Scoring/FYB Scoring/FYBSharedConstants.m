@@ -10,3 +10,6 @@
 
 NSString* const ReuseIdentifier = @"ReuseIdentifier";
 CGFloat const TableWidth = 768;
+
+// Notifications
+NSString *const NotificationNextRound = @"NotificationNextRound";

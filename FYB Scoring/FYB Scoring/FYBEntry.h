@@ -14,6 +14,7 @@
 
 @property (nonatomic) NSInteger betValue;
 @property (nonatomic) NSInteger madeValue;
+@property (nonatomic) FYBRound *round;
 
 // Keep this data so the score label will refer to this value instead of player score
 @property (nonatomic) NSInteger scoreForEntry;

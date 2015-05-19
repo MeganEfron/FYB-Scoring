@@ -15,7 +15,7 @@
 + (instancetype)sharedManager;
 
 - (BOOL) isRoundFinished:(FYBRound *)round;
-- (void)nextRound;
 - (NSInteger)getCurrentRound;
+- (void)nextRound;
 
 @end

@@ -27,15 +27,22 @@
 
 @implementation FYBScoringTableViewController
 
+- (void)dealloc {
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNextRound object:nil];
+}
+
 - (instancetype)initWithStyle:(UITableViewStyle)style rounds:(NSArray *)rounds players:(NSArray *)players {
     self = [super initWithStyle:style];
     if (self) {
         self.rounds = rounds;
         self.players = players;
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:NotificationNextRound object:nil];
 
     }
     return self;
 }
+
 
 - (void)viewDidLoad {
     
@@ -43,6 +50,11 @@
 }
 
 
+#pragma mark - Refresh
+
+- (void)refresh {
+    [self.tableView reloadData];
+}
 
 
 #pragma mark - Table View Data Source
@@ -80,13 +92,15 @@
     
     FYBRound *round = self.rounds[indexPath.row];
     cell.roundNumberLabel.text = [@(round.amountOfCards) stringValue];
-    [cell colorStartingPlayer:round.startingPlayer];
     cell.selectionStyle = UITableViewCellSelectionStyleNone;
     
 //    Setting all values after current round not able to played
     if (indexPath.row != [[FYBGameManager sharedManager] getCurrentRound]) {
-//        cell.backgroundColor = [UIColor grayColor];
+        cell.backgroundColor = [UIColor colorWithWhite:0.938 alpha:1.000];
         cell.userInteractionEnabled = NO;
+    }
+    else {
+        [cell colorStartingPlayer:round.startingPlayer];
     }
 }
 
@@ -112,13 +126,7 @@
 
 #pragma mark - Table View Delegate
 
-- (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
 
-- (void)tableView:(UITableView *)tableView didDeselectRowAtIndexPath:(NSIndexPath *)indexPath {
-    
-}
 
 
 @end

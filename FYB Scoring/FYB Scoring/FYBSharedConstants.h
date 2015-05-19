@@ -10,3 +10,6 @@
 
 extern NSString *const ReuseIdentifier;
 extern CGFloat const TableWidth;
+
+// Notifications
+extern NSString *const NotificationNextRound;
