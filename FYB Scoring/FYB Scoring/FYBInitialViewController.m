@@ -13,12 +13,13 @@
 #import "FYBEntry.h"
 #import "FYBPlayer.h"
 
-@interface FYBInitialViewController ()      <UITableViewDataSource>
+static NSInteger const CellHeight = 50;
 
-@property (nonatomic, strong) NSArray *players;
+@interface FYBInitialViewController ()      <UITableViewDataSource, UITableViewDelegate>
+
+@property (nonatomic, strong) NSMutableArray *players;
 @property (nonatomic) NSInteger amountOfRounds;
 @property (nonatomic) NSInteger roundIndex;
-
 
 // Views
 @property (nonatomic, strong) UITableView *playerTableView;
@@ -32,16 +33,17 @@
     
     [super viewDidLoad];
     
-    [self setupView];
-    
     FYBPlayer *player1 = [[FYBPlayer alloc] initWithName:@"Megan"];
     FYBPlayer *player2 = [[FYBPlayer alloc] initWithName:@"Brogan"];
     FYBPlayer *player3 = [[FYBPlayer alloc] initWithName:@"Rodney"];
     FYBPlayer *player4 = [[FYBPlayer alloc] initWithName:@"Lauri"];
     
-    self.players = @[player1, player2, player3, player4];
+    self.players = [[NSMutableArray alloc] initWithArray:@[player1, player2, player3, player4]];
+    
     self.amountOfRounds = 10;
     self.roundIndex = self.amountOfRounds + 1;
+
+    [self setupView];
 }
 
 - (void)setupView {
@@ -51,10 +53,22 @@
     
     UIView* superView = self.view;
 
-    self.playerTableView = [[UITableView alloc] initWithFrame:CGRectMake(0, 0, 0, 0) style:UITableViewStyleGrouped];
-
+    
     // ----- Setting up subviews -----
     
+    // Creating player table view
+    self.playerTableView = [UITableView new];
+    self.playerTableView.dataSource = self;
+    self.playerTableView.delegate = self;
+    [superView addSubview:self.playerTableView];
+
+
+    // Creating Player Table Label
+    UILabel *tableLabel = [UILabel new];
+    tableLabel.text = @"PLAYERS";
+    tableLabel.textColor = [UIColor defaultTextColor];
+    [superView addSubview:tableLabel];
+
     // Create button to start game
     UIButton* startGameButton = [UIButton buttonWithType:UIButtonTypeSystem];
     
@@ -71,9 +85,28 @@
     [superView addSubview:startGameButton];
     
     
+    
     // ----- Setting up view constraints -----
+
+    // Table View Constraints
+    [self.playerTableView mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(superView);
+        make.left.equalTo(superView).with.offset(50);
+        make.right.equalTo(superView).with.offset(-50);
+        make.top.equalTo(superView).with.offset(100);
+        make.height.mas_equalTo(CellHeight * ([self.players count] + 1));
+    }];
+
+    // Table label constraints
+    [tableLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.bottom.equalTo(self.playerTableView.mas_top).with.offset(-20);
+        make.left.equalTo(self.playerTableView).with.offset(20);
+    }];
+
+    // Start game button constraints
     [startGameButton mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.center.equalTo(superView);
+        make.centerX.equalTo(superView);
+        make.bottom.equalTo(superView).with.offset(-100);
     }];
     
 }
@@ -154,6 +187,34 @@
     return [rounds copy];
 }
 
+
+
+
+#pragma mark - Table View Data Source
+
+
+
+- (NSInteger)tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return [self.players count] + 1;
+}
+
+- (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseIdentifier];
+
+    if (indexPath.row < [self.players count]) {
+        FYBPlayer *player = [self.players objectAtIndex:indexPath.row];
+        cell.textLabel.text = player.name;
+    }
+    
+    return cell;
+}
+
+
+#pragma mark - Table View Delegate
+
+- (CGFloat)tableView:(UITableView *)tableView heightForRowAtIndexPath:(NSIndexPath *)indexPath {
+    return CellHeight;
+}
 
 
 @end
