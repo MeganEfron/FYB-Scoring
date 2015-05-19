@@ -41,9 +41,9 @@ static NSInteger const CellHeight = 50;
     
     self.players = [NSMutableArray new];
     
-    [self.players addObject:[[FYBPlayer alloc] initWithName:@"Megan"]];
-    [self.players addObject:[[FYBPlayer alloc] initWithName:@"Brogan"]];
-    [self.players addObject:[[FYBPlayer alloc] initWithName:@"Lauri"]];
+//    [self.players addObject:[[FYBPlayer alloc] initWithName:@"Megan"]];
+//    [self.players addObject:[[FYBPlayer alloc] initWithName:@"Brogan"]];
+//    [self.players addObject:[[FYBPlayer alloc] initWithName:@"Lauri"]];
     
     self.amountOfRounds = 10;
 
@@ -173,32 +173,37 @@ static NSInteger const CellHeight = 50;
 }
 
 
-- (NSInteger)roundNumber:(NSInteger)index {
-    
-    if (index < self.amountOfRounds)
-    {
-        self.roundIndex--;
-    }
-    else if (index >= self.amountOfRounds + [self.players count] - 1)
-    {
-        self.roundIndex++;
-    }
-    
-    return self.roundIndex;
-}
+
+#pragma mark - Start Game
+
 
 - (void)startGame {
     
-    self.roundIndex = self.amountOfRounds + 1;
-    NSArray *rounds = [self generateRounds];
-    
-    FYBScoringTableViewController *scoringSheetController = [[FYBScoringTableViewController alloc] initWithStyle:UITableViewStyleGrouped
-                                                                                                          rounds:rounds
-                                                                                                         players:self.players];
-    
-    UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:scoringSheetController];
-    
-    [self presentViewController:navController animated:YES completion:nil];
+    if ([self.players count] > 2 && [self.players count] < 7)
+    {
+        self.roundIndex = self.amountOfRounds + 1;
+        NSArray *rounds = [self generateRounds];
+        
+        FYBScoringTableViewController *scoringSheetController = [[FYBScoringTableViewController alloc] initWithStyle:UITableViewStyleGrouped
+                                                                                                              rounds:rounds
+                                                                                                             players:self.players];
+        
+        UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:scoringSheetController];
+        
+        [self presentViewController:navController animated:YES completion:nil];
+    }
+    else
+    {
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid amount of players"
+                                                                       message:@"There must be between 3 to 6 players"
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+        
+        [alert addAction:okayAction];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
 }
 
 
@@ -249,6 +254,22 @@ static NSInteger const CellHeight = 50;
 }
 
 
+- (NSInteger)roundNumber:(NSInteger)index {
+    
+    if (index < self.amountOfRounds)
+    {
+        self.roundIndex--;
+    }
+    else if (index >= self.amountOfRounds + [self.players count] - 1)
+    {
+        self.roundIndex++;
+    }
+    
+    return self.roundIndex;
+}
+
+
+
 #pragma mark - Resizing Player Table
 
 - (void)refreshPlayerTable {
@@ -291,11 +312,45 @@ static NSInteger const CellHeight = 50;
 - (UITableViewCell *)tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
     UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:ReuseIdentifier];
 
+    
+//    if (indexPath.row < [self.players count]) {
+//        FYBPlayer *player = [self.players objectAtIndex:indexPath.row];
+//        cell.textLabel.text = player.name;
+//    }
+//    
+//    else {
+//        if ([self.players count] < 3)
+//            cell.textLabel.textColor = self.colorToUse;
+//        else
+//            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+//        cell.textLabel.text = @"Add";
+//        cell.textLabel.textAlignment = NSTextAlignmentCenter;
+//    }
+    [self configureCell:cell forIndexPath:indexPath];
+    
+    return cell;
+}
+
+
+- (UITableViewCell *)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath*)indexPath {
+    
     if (indexPath.row < [self.players count]) {
         FYBPlayer *player = [self.players objectAtIndex:indexPath.row];
         cell.textLabel.text = player.name;
-    } else {
-        cell.textLabel.textColor = self.colorToUse;
+    }
+    
+    else {
+        
+        if ([self.players count] < 6)
+        {
+            cell.textLabel.textColor = self.colorToUse;
+        }
+        else
+        {
+            cell.textLabel.textColor = [UIColor grayColor];
+            cell.selectionStyle = UITableViewCellSelectionStyleNone;
+        }
+        
         cell.textLabel.text = @"Add";
         cell.textLabel.textAlignment = NSTextAlignmentCenter;
     }
@@ -335,7 +390,7 @@ static NSInteger const CellHeight = 50;
 
 - (void)tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
     
-    if (indexPath.row == [self.players count]) {
+    if (indexPath.row == [self.players count] && [self.players count] < 6) {
         [self displayAddPlayerView];
     }
 }
