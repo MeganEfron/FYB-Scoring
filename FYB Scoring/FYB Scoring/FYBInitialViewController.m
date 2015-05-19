@@ -25,6 +25,8 @@ static NSInteger const CellHeight = 50;
 
 // Views
 @property (nonatomic, strong) UITableView *playerTableView;
+@property (nonatomic, strong) UIStepper *roundStepper;
+@property (nonatomic, strong) UILabel *roundLabel;
 
 @end
 
@@ -39,8 +41,11 @@ static NSInteger const CellHeight = 50;
     
     self.players = [NSMutableArray new];
     
+    [self.players addObject:[[FYBPlayer alloc] initWithName:@"Megan"]];
+    [self.players addObject:[[FYBPlayer alloc] initWithName:@"Brogan"]];
+    [self.players addObject:[[FYBPlayer alloc] initWithName:@"Lauri"]];
+    
     self.amountOfRounds = 10;
-    self.roundIndex = self.amountOfRounds + 1;
 
     [self setupView];
 }
@@ -85,10 +90,31 @@ static NSInteger const CellHeight = 50;
     [startGameButton setTitle:@"START GAME" forState:UIControlStateNormal];
     startGameButton.titleLabel.font = [UIFont systemFontOfSize:20];
     [startGameButton setTintColor:[UIColor defaultTextColor]];
-    
-    // Adding button to superview
     [superView addSubview:startGameButton];
     
+    // Creating round label
+    UILabel *roundsLabel = [UILabel new];
+    roundsLabel.text = @"ROUNDS";
+    roundsLabel.font = [UIFont systemFontOfSize:25];
+    roundsLabel.textColor = [UIColor defaultTextColor];
+    [superView addSubview:roundsLabel];
+    
+    // Creating stepper
+    self.roundStepper = [UIStepper new];
+    self.roundStepper.continuous = NO;
+    self.roundStepper.value = self.amountOfRounds;
+    self.roundStepper.minimumValue = 3;
+    self.roundStepper.maximumValue = 13;
+    self.roundStepper.tintColor = [UIColor whiteColor];
+    [self.roundStepper addTarget:self action:@selector(updateRound:) forControlEvents:UIControlEventValueChanged];
+    [superView addSubview:self.roundStepper];
+    
+    // Creating round number label
+    self.roundLabel = [UILabel new];
+    self.roundLabel.text = [@(self.amountOfRounds) stringValue];
+    self.roundLabel.font = [UIFont systemFontOfSize:25];
+    self.roundLabel.textColor = [UIColor defaultTextColor];
+    [superView addSubview:self.roundLabel];
     
     
     // ----- Setting up view constraints -----
@@ -100,7 +126,6 @@ static NSInteger const CellHeight = 50;
         make.right.equalTo(superView).with.offset(-50);
         make.top.equalTo(superView).with.offset(120);
         make.height.mas_equalTo(CellHeight).with.offset(CellHeight * ([self.players count] + 1));
-//        make.height.mas_equalTo(CellHeight * ([self.players count] + 1));
     }];
 
     // Table label constraints
@@ -120,9 +145,35 @@ static NSInteger const CellHeight = 50;
         make.bottom.equalTo(superView).with.offset(-100);
     }];
     
+    // Round label constraints
+    [roundsLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.left.equalTo(tableLabel);
+        make.centerY.equalTo(superView).with.offset(150);
+    }];
+    
+    [self.roundLabel mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(superView).with.offset(-70);
+        make.centerY.equalTo(roundsLabel);
+    }];
+    
+    
+    [self.roundStepper mas_makeConstraints:^(MASConstraintMaker *make) {
+        make.centerX.equalTo(superView).with.offset(70);
+        make.centerY.equalTo(roundsLabel);
+    }];
+    
+    
 }
 
-- (NSInteger)roundNumber:(NSInteger)index /* Maybe pass in something */ {
+
+- (void) updateRound:(UIStepper *)stepper {
+    self.amountOfRounds = (NSInteger)stepper.value;
+    
+    self.roundLabel.text = [@(self.amountOfRounds) stringValue];
+}
+
+
+- (NSInteger)roundNumber:(NSInteger)index {
     
     if (index < self.amountOfRounds)
     {
@@ -138,7 +189,7 @@ static NSInteger const CellHeight = 50;
 
 - (void)startGame {
     
-
+    self.roundIndex = self.amountOfRounds + 1;
     NSArray *rounds = [self generateRounds];
     
     FYBScoringTableViewController *scoringSheetController = [[FYBScoringTableViewController alloc] initWithStyle:UITableViewStyleGrouped
