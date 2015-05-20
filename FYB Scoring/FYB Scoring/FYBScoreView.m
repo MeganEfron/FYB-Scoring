@@ -143,7 +143,11 @@
     
     if (self.entry.entryIndex == self.entry.round.lastPlayer && textField == self.betTextField)
     {
-        NSLog(@"Last entry");
+//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Can't Go" message:nil preferredStyle:UIAlertControllerStyleAlert];
+//        
+//        UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+//        
+//        [alert addAction:okayAction];
     }
     
     if (self.entry.entryIndex == self.entry.round.lastPlayer && textField == self.madeTextField)
@@ -159,7 +163,6 @@
     
     return YES;
 }
-
 
 
 - (NSInteger) calculateScoreFromBet:(NSInteger)bet made:(NSInteger)made {
