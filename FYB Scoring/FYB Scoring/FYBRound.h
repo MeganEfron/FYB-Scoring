@@ -14,5 +14,6 @@
 @property (nonatomic) NSInteger amountOfCards;
 @property (nonatomic, strong) NSMutableArray *entries; //of type FYBEntry
 @property (nonatomic) NSInteger startingPlayer;
+@property (nonatomic) NSInteger lastPlayer;
 
 @end

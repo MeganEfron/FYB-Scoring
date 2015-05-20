@@ -222,23 +222,22 @@ static NSInteger const MaximumRounds = 15;
 
 
 - (void)closeGame {
-    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.players count] inSection:0];
+    [self.playerTableView deselectRowAtIndexPath:indexPath animated:YES];
     
     for (FYBPlayer *player in self.players)
     {
         player.score = @(0);
     }
     
-    [self.players removeAllObjects];
-    
-    [self.playerTableView reloadData];
+    [self dismissViewControllerAnimated:YES completion:nil];
 }
 
 
 - (NSArray *)generateRounds {
     
     NSInteger totalRounds = (self.amountOfRounds - 1) * 2 + (int)[self.players count];
-    
     
     NSMutableArray *rounds = [NSMutableArray new];
     
@@ -250,6 +249,10 @@ static NSInteger const MaximumRounds = 15;
         FYBRound *newRound = [FYBRound new];
         
         newRound.startingPlayer = startingPlayerIndex;
+        newRound.lastPlayer = startingPlayerIndex - 1;
+        
+        if (newRound.lastPlayer < 0)
+            newRound.lastPlayer = [self.players count] - 1;
         
         // Unique identifier of round (0 - total amount of rounds e.g. 22)
         newRound.roundNumber = i;
@@ -263,6 +266,7 @@ static NSInteger const MaximumRounds = 15;
             FYBEntry *newEntry = [FYBEntry new];
             newEntry.player = self.players[j];
             newEntry.round = newRound;
+            newEntry.entryIndex = j;
             
             [newRound.entries addObject:newEntry];
         }
@@ -275,7 +279,6 @@ static NSInteger const MaximumRounds = 15;
         if (startingPlayerIndex == [self.players count])
             startingPlayerIndex = 0;
     }
-    
     
     return [rounds copy];
 }

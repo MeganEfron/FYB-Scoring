@@ -12,6 +12,7 @@
 #import "FYBPlayer.h"
 #import "FYBScoringTableViewController.h"
 #import "FYBPlayer+Extended.h"
+#import "FYBRound.h"
 
 @interface FYBScoreView ()  <UITextFieldDelegate>
 
@@ -99,7 +100,6 @@
 
 
 
-
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
     [textField resignFirstResponder];
     
@@ -139,6 +139,16 @@
         self.entry.scoreForEntry = [self.entry.player.score integerValue];
         
         self.scoreLabel.text = [@(self.entry.scoreForEntry) stringValue];
+    }
+    
+    if (self.entry.entryIndex == self.entry.round.lastPlayer && textField == self.betTextField)
+    {
+        NSLog(@"Last entry");
+    }
+    
+    if (self.entry.entryIndex == self.entry.round.lastPlayer && textField == self.madeTextField)
+    {
+        NSLog(@"Last entry");
     }
     
     if ([[FYBGameManager sharedManager] isRoundFinished:self.entry.round])
