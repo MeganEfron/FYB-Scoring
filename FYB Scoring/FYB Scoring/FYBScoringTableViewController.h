@@ -12,7 +12,4 @@
 
 - (instancetype)initWithStyle:(UITableViewStyle)style rounds:(NSArray *)rounds players:(NSArray *)players;
 
-//+ (void) nextRound;
-+ (NSInteger)getCurrentRound;
-
 @end

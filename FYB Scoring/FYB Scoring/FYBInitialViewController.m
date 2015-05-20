@@ -45,16 +45,16 @@ static NSInteger const MaximumRounds = 15;
     
     self.players = [NSMutableArray new];
     
-//    [self.players addObject:[[FYBPlayer alloc] initWithName:@"Megan"]];
-//    [self.players addObject:[[FYBPlayer alloc] initWithName:@"Brogan"]];
-//    [self.players addObject:[[FYBPlayer alloc] initWithName:@"Lauri"]];
-    
     self.amountOfRounds = 10;
 
     [self setupView];
 }
 
+
 - (void)setupView {
+    
+//    self.navigationItem.rightBarButtonItem = self.editButtonItem;
+    
     
     // ----- Setting up screen -----
     self.title = @"FYB GAME DETAILS";
@@ -93,7 +93,7 @@ static NSInteger const MaximumRounds = 15;
     [startGameButton addTarget:self action:@selector(startGame) forControlEvents:UIControlEventTouchUpInside];
     [startGameButton setTitle:@"START GAME" forState:UIControlStateNormal];
     startGameButton.titleLabel.font = [UIFont systemFontOfSize:20];
-    [startGameButton setTintColor:[UIColor defaultTextColor]];
+    [startGameButton setTintColor:[UIColor colorWithRed:0.758 green:0.873 blue:0.999 alpha:1.000]];
     [superView addSubview:startGameButton];
     
     // Creating round label
@@ -170,6 +170,10 @@ static NSInteger const MaximumRounds = 15;
     
 }
 
+- (void)setEditing:(BOOL)editing animated:(BOOL)animated {
+    [self.playerTableView setEditing:editing animated:animated];
+}
+
 
 - (void) updateRound:(UIStepper *)stepper {
     self.amountOfRounds = (NSInteger)stepper.value;
@@ -195,12 +199,17 @@ static NSInteger const MaximumRounds = 15;
         
         UINavigationController *navController = [[UINavigationController alloc] initWithRootViewController:scoringSheetController];
         
+        scoringSheetController.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithBarButtonSystemItem:UIBarButtonSystemItemCancel
+                                                                                                       target:self
+                                                                                                       action:@selector(closeGame)];
+        
         [self presentViewController:navController animated:YES completion:nil];
     }
+    
     else
     {
         UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid amount of players"
-                                                                       message:@"There must be between 3 to 10 players"
+                                                                       message:@"There must be between 3 to 7 players"
                                                                 preferredStyle:UIAlertControllerStyleAlert];
         
         UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
@@ -211,6 +220,19 @@ static NSInteger const MaximumRounds = 15;
     }
 }
 
+
+- (void)closeGame {
+    [self dismissViewControllerAnimated:YES completion:nil];
+    
+    for (FYBPlayer *player in self.players)
+    {
+        player.score = @(0);
+    }
+    
+    [self.players removeAllObjects];
+    
+    [self.playerTableView reloadData];
+}
 
 
 - (NSArray *)generateRounds {
@@ -279,14 +301,12 @@ static NSInteger const MaximumRounds = 15;
 
 - (void)refreshPlayerTable {
     
-    // Update table
-//    [self.playerTableView reloadData];
 
     // Ensure table is sized to fit
     [self.view setNeedsUpdateConstraints];
     [self.view updateConstraintsIfNeeded];
     
-    [UIView animateWithDuration:0.5 animations:^{
+    [UIView animateWithDuration:0.2 animations:^{
         
         [self.view layoutIfNeeded];
     }];
@@ -325,9 +345,12 @@ static NSInteger const MaximumRounds = 15;
 
 - (UITableViewCell *)configureCell:(UITableViewCell *)cell forIndexPath:(NSIndexPath*)indexPath {
     
+    cell.textLabel.font = [UIFont systemFontOfSize:20];
+    
     if (indexPath.row < [self.players count]) {
         FYBPlayer *player = [self.players objectAtIndex:indexPath.row];
         cell.textLabel.text = player.name;
+        cell.showsReorderControl = YES;
     }
     
     else {
@@ -348,6 +371,16 @@ static NSInteger const MaximumRounds = 15;
     
     return cell;
 }
+
+//- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+//    
+//}
+//
+//
+//
+//- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+//    return YES;
+//}
 
 
 #pragma mark - Table View Delegate
@@ -394,16 +427,20 @@ static NSInteger const MaximumRounds = 15;
     FYBAddPlayerTableViewController* addPlayerController = [[FYBAddPlayerTableViewController alloc] initWithStyle:UITableViewStylePlain];
     
     addPlayerController.newPlayerSelected = ^(FYBPlayer *newPlayer) {
-        NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.players count] inSection:0];
-        [self.playerTableView deselectRowAtIndexPath:indexPath animated:YES];
         
-        [self.players addObject:newPlayer];
-        
-        [self.playerTableView beginUpdates];
-        [self.playerTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
-        [self.playerTableView endUpdates];
-        
-        [self refreshPlayerTable];
+        if (![self.players containsObject:newPlayer])
+        {
+            NSIndexPath *indexPath = [NSIndexPath indexPathForRow:[self.players count] inSection:0];
+            [self.playerTableView deselectRowAtIndexPath:indexPath animated:YES];
+            
+            [self.players addObject:newPlayer];
+            
+            [self.playerTableView beginUpdates];
+            [self.playerTableView insertRowsAtIndexPaths:@[indexPath] withRowAnimation:UITableViewRowAnimationAutomatic];
+            [self.playerTableView endUpdates];
+            
+            [self refreshPlayerTable];
+        }
         
         
         [self dismissViewControllerAnimated:YES completion:nil];
@@ -415,7 +452,6 @@ static NSInteger const MaximumRounds = 15;
     
     [self presentViewController:navController animated:YES completion:nil];
 }
-
 
 
 

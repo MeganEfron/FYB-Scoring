@@ -10,4 +10,10 @@
 
 @interface FYBPlayer (Extended)
 
+//- (void)addToScore:(NSInteger)scoreToAdd;
+
+- (instancetype)initWithName:(NSString *)name;
+
+- (void) addToScore:(NSInteger)scoreToAdd;
+
 @end

@@ -10,8 +10,9 @@
 
 @class FYBPlayer;
 
-@interface FYBAddPlayerTableViewController : UITableViewController
+@interface FYBAddPlayerTableViewController : UITableViewController  <NSFetchedResultsControllerDelegate>
 
 @property (nonatomic, copy) void (^newPlayerSelected)(FYBPlayer *newPlayer);
+@property (strong, nonatomic) NSFetchedResultsController *fetchedResultsController;
 
 @end

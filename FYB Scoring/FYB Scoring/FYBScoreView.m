@@ -11,6 +11,7 @@
 #import "FYBEntry.h"
 #import "FYBPlayer.h"
 #import "FYBScoringTableViewController.h"
+#import "FYBPlayer+Extended.h"
 
 @interface FYBScoreView ()  <UITextFieldDelegate>
 
@@ -47,7 +48,12 @@
     self.madeTextField.returnKeyType = UIReturnKeyDone;
     
     // Setting the font of the score to be larger than the text fields
-    self.scoreLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize] + 7];
+    self.scoreLabel.font = [UIFont systemFontOfSize:27];
+    self.madeTextField.font = [UIFont systemFontOfSize:20];
+    self.betTextField.font = [UIFont systemFontOfSize:20];
+    
+    self.betTextField.placeholder = @"B";
+    self.madeTextField.placeholder = @"M";
     
     // Adding targets to text fields
     self.betTextField.delegate = self;
@@ -73,13 +79,13 @@
     // -------------- View Constraints --------------
     
     [self.betTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.left.equalTo(self).with.offset(5);
+        make.left.equalTo(self).with.offset(3);
         make.height.equalTo(self);
         make.width.mas_equalTo(@30);
     }];
     
     [self.madeTextField mas_makeConstraints:^(MASConstraintMaker *make) {
-        make.right.equalTo(self).with.offset(-5);
+        make.right.equalTo(self).with.offset(-3);
         make.height.equalTo(self);
         make.width.mas_equalTo(@30);
     }];
@@ -92,9 +98,6 @@
 }
 
 
-
-// REMEMBER HERE TO MAKE SURE IF THE VALUE OF THE TEXT FIELD DIDN'T ACTUALLY CHANGE, TO NOT ADD THE SCORE TO THE PLAYERS SCORE
-// OR IF THE VALUE IS CHANGED, TO REVERT THE SCORE TO THE SCORE BEFORE
 
 
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
@@ -122,15 +125,20 @@
         if (previousBet && previousMade)
         {
             NSInteger scoreToSubtract = -[self calculateScoreFromBet:previousBet made:previousMade];
-            [self.entry.player addToScore:scoreToSubtract];
+            
+            NSInteger score = [self.entry.player.score integerValue];
+            
+            score += scoreToSubtract;
+            
+            self.entry.player.score = @(score);
         }
         
         NSInteger scoreToAdd = [self calculateScoreFromBet:self.entry.betValue made:self.entry.madeValue];
         
         [self.entry.player addToScore:scoreToAdd];
-        self.entry.scoreForEntry = self.entry.player.score;
+        self.entry.scoreForEntry = [self.entry.player.score integerValue];
         
-        self.scoreLabel.text = [@(self.entry.player.score) stringValue];
+        self.scoreLabel.text = [@(self.entry.scoreForEntry) stringValue];
     }
     
     if ([[FYBGameManager sharedManager] isRoundFinished:self.entry.round])
