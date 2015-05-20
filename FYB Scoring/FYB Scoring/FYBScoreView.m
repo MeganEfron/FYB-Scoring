@@ -48,9 +48,12 @@
     self.madeTextField.returnKeyType = UIReturnKeyDone;
     
     // Setting the font of the score to be larger than the text fields
-    self.scoreLabel.font = [UIFont systemFontOfSize:[UIFont systemFontSize] + 7];
-    self.madeTextField.font = [UIFont systemFontOfSize:12];
-    self.betTextField.font = [UIFont systemFontOfSize:12];
+    self.scoreLabel.font = [UIFont systemFontOfSize:27];
+    self.madeTextField.font = [UIFont systemFontOfSize:20];
+    self.betTextField.font = [UIFont systemFontOfSize:20];
+    
+    self.betTextField.placeholder = @"B";
+    self.madeTextField.placeholder = @"M";
     
     // Adding targets to text fields
     self.betTextField.delegate = self;

@@ -223,6 +223,15 @@ static NSInteger const MaximumRounds = 15;
 
 - (void)closeGame {
     [self dismissViewControllerAnimated:YES completion:nil];
+    
+    for (FYBPlayer *player in self.players)
+    {
+        player.score = @(0);
+    }
+    
+    [self.players removeAllObjects];
+    
+    [self.playerTableView reloadData];
 }
 
 
