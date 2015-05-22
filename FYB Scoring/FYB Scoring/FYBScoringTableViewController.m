@@ -13,6 +13,7 @@
 #import "FYBSectionHeaderView.h"
 #import "FYBScoreView.h"
 #import "FYBPlayer.h"
+#import "FYBEntry.h"
 
 
 @interface FYBScoringTableViewController ()
@@ -29,6 +30,9 @@
 
 - (void)dealloc {
     [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationNextRound object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationCantGoAlert object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationCheckMadeAmount object:nil];
+    [[NSNotificationCenter defaultCenter] removeObserver:self name:NotificationCheckBetAmount object:nil];
 }
 
 - (instancetype)initWithStyle:(UITableViewStyle)style rounds:(NSArray *)rounds players:(NSArray *)players {
@@ -38,6 +42,12 @@
         self.players = players;
         
         [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(refresh) name:NotificationNextRound object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(cantGoAlert) name:NotificationCantGoAlert object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkMadeAmount) name:NotificationCheckMadeAmount object:nil];
+        
+        [[NSNotificationCenter defaultCenter] addObserver:self selector:@selector(checkBetAmount) name:NotificationCheckBetAmount object:nil];
 
     }
     return self;
@@ -48,15 +58,112 @@
     
     self.title = @"SCORING";
     
-    
 }
 
 
-#pragma mark - Refresh
+#pragma mark - Notification Methods
 
 - (void)refresh {
     [self.tableView reloadData];
 }
+
+- (void)cantGoAlert {
+    NSInteger totalBetSoFar = 0;
+    
+    FYBRound *round = [self.rounds objectAtIndex:[[FYBGameManager sharedManager] getCurrentRound]];
+    
+    for (FYBEntry *entry in round.entries)
+    {
+        if (entry.betValue)
+            totalBetSoFar += entry.betValue;
+    }
+    
+    NSInteger cantGo = round.amountOfCards - totalBetSoFar;
+    
+    if (cantGo < 0)
+        cantGo = -cantGo;
+    
+    UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Can't Go"
+                                                                   message:[@(cantGo) stringValue]
+                                                            preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+    
+    [alert addAction:okayAction];
+    
+    [self presentViewController:alert animated:YES completion:nil];
+}
+
+
+
+- (void)checkBetAmount {
+    NSInteger totalBetSoFar = 0;
+    
+    FYBRound *round = [self.rounds objectAtIndex:[[FYBGameManager sharedManager] getCurrentRound]];
+    
+    for (FYBEntry *entry in round.entries)
+    {
+        if (entry.betValue)
+            totalBetSoFar += entry.betValue;
+    }
+    
+    if (totalBetSoFar == round.amountOfCards)
+    {
+        FYBEntry *lastEntry = round.entries[round.lastPlayer];
+        NSInteger couldntGo = lastEntry.betValue;
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid Bet Amount"
+                                                                       message:[NSString stringWithFormat:@"I said you couldn't go %i", couldntGo]
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+        
+        [alert addAction:okayAction];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+
+
+
+- (void)checkMadeAmount {
+    NSInteger totalMade = 0;
+    
+    // Getting the current round
+    FYBRound *round = [self.rounds objectAtIndex:[[FYBGameManager sharedManager] getCurrentRound]];
+    
+    // Adding all made values
+    for (FYBEntry *entry in round.entries)
+    {
+        if (entry.madeValue)
+            totalMade += entry.madeValue;
+    }
+    
+    NSInteger excessAmount = round.amountOfCards - totalMade;
+    NSString *underOrOver;
+    
+    if (excessAmount > 0)
+        underOrOver = @"under";
+    else if (excessAmount < 0)
+        underOrOver = @"over";
+    
+    if (excessAmount < 0)
+        excessAmount = -excessAmount;
+    
+    if (excessAmount != 0)
+    {
+        [[FYBGameManager sharedManager] previousRound];
+        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Invalid Made Amount"
+                                                                       message:[NSString stringWithFormat:@"You have entered %i %@", excessAmount, underOrOver]
+                                                                preferredStyle:UIAlertControllerStyleAlert];
+        
+        UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
+        
+        [alert addAction:okayAction];
+        
+        [self presentViewController:alert animated:YES completion:nil];
+    }
+}
+
 
 
 #pragma mark - Table View Data Source

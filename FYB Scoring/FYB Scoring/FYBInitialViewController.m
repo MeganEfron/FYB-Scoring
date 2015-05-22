@@ -55,6 +55,7 @@ static NSInteger const MaximumRounds = 15;
     
 //    self.navigationItem.rightBarButtonItem = self.editButtonItem;
     
+    self.navigationItem.leftBarButtonItem = [[UIBarButtonItem alloc] initWithTitle:@"View Leader Board" style:UIBarButtonItemStylePlain target:self action:@selector(viewLeaderBoard)];
     
     // ----- Setting up screen -----
     self.title = @"FYB GAME DETAILS";
@@ -248,11 +249,7 @@ static NSInteger const MaximumRounds = 15;
         // Creating new round
         FYBRound *newRound = [FYBRound new];
         
-        newRound.startingPlayer = startingPlayerIndex;
-        newRound.lastPlayer = startingPlayerIndex - 1;
-        
-        if (newRound.lastPlayer < 0)
-            newRound.lastPlayer = [self.players count] - 1;
+        [newRound calculateOrderOfEntries:startingPlayerIndex totalPlayers:[self.players count]];
         
         // Unique identifier of round (0 - total amount of rounds e.g. 22)
         newRound.roundNumber = i;
@@ -296,6 +293,11 @@ static NSInteger const MaximumRounds = 15;
     }
     
     return self.roundIndex;
+}
+
+
+- (void)viewLeaderBoard {
+    NSLog(@"View Leader Board");
 }
 
 
@@ -375,15 +377,27 @@ static NSInteger const MaximumRounds = 15;
     return cell;
 }
 
-//- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-//    
-//}
-//
-//
-//
-//- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-//    return YES;
-//}
+- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+    
+}
+
+
+
+- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == [self.players count])
+        return NO;
+    
+    return YES;
+}
+
+- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+    if (indexPath.row == [self.players count])
+    {
+        return UITableViewCellEditingStyleInsert;
+    }
+    else
+        return UITableViewCellEditingStyleNone;
+}
 
 
 #pragma mark - Table View Delegate

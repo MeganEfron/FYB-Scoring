@@ -17,5 +17,6 @@
 - (BOOL) isRoundFinished:(FYBRound *)round;
 - (NSInteger)getCurrentRound;
 - (void)nextRound;
+- (void)previousRound;
 
 @end

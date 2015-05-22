@@ -141,18 +141,19 @@
         self.scoreLabel.text = [@(self.entry.scoreForEntry) stringValue];
     }
     
+    if (self.entry.entryIndex == self.entry.round.secondLastPlayer && textField == self.betTextField)
+    {
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationCantGoAlert object:nil];
+    }
+    
     if (self.entry.entryIndex == self.entry.round.lastPlayer && textField == self.betTextField)
     {
-//        UIAlertController *alert = [UIAlertController alertControllerWithTitle:@"Can't Go" message:nil preferredStyle:UIAlertControllerStyleAlert];
-//        
-//        UIAlertAction *okayAction = [UIAlertAction actionWithTitle:@"Okay" style:UIAlertActionStyleDefault handler:nil];
-//        
-//        [alert addAction:okayAction];
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationCheckBetAmount object:nil];
     }
     
     if (self.entry.entryIndex == self.entry.round.lastPlayer && textField == self.madeTextField)
     {
-        NSLog(@"Last entry");
+        [[NSNotificationCenter defaultCenter] postNotificationName:NotificationCheckMadeAmount object:nil];
     }
     
     if ([[FYBGameManager sharedManager] isRoundFinished:self.entry.round])

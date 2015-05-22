@@ -17,4 +17,18 @@
     return _entries;
 }
 
+- (void)calculateOrderOfEntries:(NSInteger)firstEntryIndex totalPlayers:(NSInteger)totalPlayers {
+    self.startingPlayer = firstEntryIndex;
+    
+    self.lastPlayer = self.startingPlayer - 1;
+    
+    if (self.lastPlayer < 0)
+        self.lastPlayer = totalPlayers - 1;
+    
+    self.secondLastPlayer = self.lastPlayer - 1;
+    
+    if (self.secondLastPlayer < 0)
+        self.secondLastPlayer = totalPlayers - 1;
+}
+
 @end

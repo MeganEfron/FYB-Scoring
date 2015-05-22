@@ -13,3 +13,6 @@ extern CGFloat const TableWidth;
 
 // Notifications
 extern NSString *const NotificationNextRound;
+extern NSString *const NotificationCantGoAlert;
+extern NSString *const NotificationCheckMadeAmount;
+extern NSString *const NotificationCheckBetAmount;

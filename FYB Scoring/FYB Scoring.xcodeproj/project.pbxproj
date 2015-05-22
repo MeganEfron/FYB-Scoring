@@ -15,6 +15,7 @@
 		440B11371B0223B00060867A /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 440B11351B0223B00060867A /* LaunchScreen.xib */; };
 		440B11431B0223B00060867A /* FYB_ScoringTests.m in Sources */ = {isa = PBXBuildFile; fileRef = 440B11421B0223B00060867A /* FYB_ScoringTests.m */; };
 		440B114E1B0224490060867A /* FYBInitialViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 440B114D1B0224490060867A /* FYBInitialViewController.m */; };
+		443EF0511B0F20CB00964C32 /* FYBGame.m in Sources */ = {isa = PBXBuildFile; fileRef = 443EF0501B0F20CB00964C32 /* FYBGame.m */; };
 		44683B621B055A20006AC0E0 /* FYBScoringCell.m in Sources */ = {isa = PBXBuildFile; fileRef = 44683B611B055A20006AC0E0 /* FYBScoringCell.m */; };
 		447652361B0AD7E500EF1F65 /* FYBAddPlayerTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 447652351B0AD7E500EF1F65 /* FYBAddPlayerTableViewController.m */; };
 		447652391B0AFB7100EF1F65 /* FYBPlayer+Extended.m in Sources */ = {isa = PBXBuildFile; fileRef = 447652381B0AFB7100EF1F65 /* FYBPlayer+Extended.m */; };
@@ -60,6 +61,8 @@
 		440B11421B0223B00060867A /* FYB_ScoringTests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = FYB_ScoringTests.m; sourceTree = "<group>"; };
 		440B114C1B0224490060867A /* FYBInitialViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBInitialViewController.h; sourceTree = "<group>"; };
 		440B114D1B0224490060867A /* FYBInitialViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBInitialViewController.m; sourceTree = "<group>"; };
+		443EF04F1B0F20CB00964C32 /* FYBGame.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBGame.h; sourceTree = "<group>"; };
+		443EF0501B0F20CB00964C32 /* FYBGame.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBGame.m; sourceTree = "<group>"; };
 		44683B601B055A20006AC0E0 /* FYBScoringCell.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBScoringCell.h; sourceTree = "<group>"; };
 		44683B611B055A20006AC0E0 /* FYBScoringCell.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = FYBScoringCell.m; sourceTree = "<group>"; };
 		447652341B0AD7E500EF1F65 /* FYBAddPlayerTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = FYBAddPlayerTableViewController.h; sourceTree = "<group>"; };
@@ -213,6 +216,8 @@
 				44DF61CB1B099B4A007C91A2 /* FYBRound.m */,
 				44DF61D31B09A8DE007C91A2 /* FYBEntry.h */,
 				44DF61D41B09A8DE007C91A2 /* FYBEntry.m */,
+				443EF04F1B0F20CB00964C32 /* FYBGame.h */,
+				443EF0501B0F20CB00964C32 /* FYBGame.m */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -350,6 +355,7 @@
 				TargetAttributes = {
 					440B11281B0223B00060867A = {
 						CreatedOnToolsVersion = 6.3.1;
+						DevelopmentTeam = AUDF4DFBCJ;
 					};
 					440B113B1B0223B00060867A = {
 						CreatedOnToolsVersion = 6.3.1;
@@ -434,6 +440,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				44DF61CC1B099B4A007C91A2 /* FYBRound.m in Sources */,
+				443EF0511B0F20CB00964C32 /* FYBGame.m in Sources */,
 				44DF61D01B09A299007C91A2 /* FYBSectionHeaderView.m in Sources */,
 				440B11321B0223B00060867A /* AppDelegate.m in Sources */,
 				44DF61DC1B09D297007C91A2 /* FYBGameManager.m in Sources */,
@@ -570,12 +577,15 @@
 			baseConfigurationReference = 3A72E6F2FC91EC4D0EB397C4 /* Pods.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "/Users/Megan/Documents/iOS Projects/FYB-Scoring/FYB Scoring/FYB Scoring/FYBScoring-Prefix.pch";
 				INFOPLIST_FILE = "FYB Scoring/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Debug;
 		};
@@ -584,12 +594,15 @@
 			baseConfigurationReference = 0528A6F9D78532B55ADF0451 /* Pods.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "/Users/Megan/Documents/iOS Projects/FYB-Scoring/FYB Scoring/FYB Scoring/FYBScoring-Prefix.pch";
 				INFOPLIST_FILE = "FYB Scoring/Info.plist";
 				IPHONEOS_DEPLOYMENT_TARGET = 8.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 			};
 			name = Release;
 		};

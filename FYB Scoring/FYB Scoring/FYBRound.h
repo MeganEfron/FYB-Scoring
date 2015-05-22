@@ -15,5 +15,8 @@
 @property (nonatomic, strong) NSMutableArray *entries; //of type FYBEntry
 @property (nonatomic) NSInteger startingPlayer;
 @property (nonatomic) NSInteger lastPlayer;
+@property (nonatomic) NSInteger secondLastPlayer;
+
+- (void)calculateOrderOfEntries:(NSInteger)firstEntryIndex totalPlayers:(NSInteger)totalPlayers;
 
 @end

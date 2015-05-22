@@ -66,4 +66,8 @@ static NSInteger CurrentRound = 0;
     return CurrentRound;
 }
 
+- (void)previousRound {
+    CurrentRound--;
+}
+
 @end

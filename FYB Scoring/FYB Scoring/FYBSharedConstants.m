@@ -13,3 +13,6 @@ CGFloat const TableWidth = 768;
 
 // Notifications
 NSString *const NotificationNextRound = @"NotificationNextRound";
+NSString *const NotificationCantGoAlert = @"NotificationCantGoAlert";
+NSString *const NotificationCheckMadeAmount = @"NotificationCheckMadeAmount";
+NSString *const NotificationCheckBetAmount = @"NotificationCheckBetAmount";
