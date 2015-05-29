@@ -315,7 +315,6 @@ static NSInteger const MaximumRounds = 15;
         
         [self.view layoutIfNeeded];
     }];
-    
 }
 
 - (void)updateViewConstraints {
@@ -377,27 +376,27 @@ static NSInteger const MaximumRounds = 15;
     return cell;
 }
 
-- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
-    
-}
+//- (void)tableView:(UITableView *)tableView moveRowAtIndexPath:(NSIndexPath *)sourceIndexPath toIndexPath:(NSIndexPath *)destinationIndexPath {
+//    
+//}
 
 
 
-- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == [self.players count])
-        return NO;
-    
-    return YES;
-}
+//- (BOOL)tableView:(UITableView *)tableView canMoveRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (indexPath.row == [self.players count])
+//        return NO;
+//    
+//    return YES;
+//}
 
-- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if (indexPath.row == [self.players count])
-    {
-        return UITableViewCellEditingStyleInsert;
-    }
-    else
-        return UITableViewCellEditingStyleNone;
-}
+//- (UITableViewCellEditingStyle)tableView:(UITableView *)tableView editingStyleForRowAtIndexPath:(NSIndexPath *)indexPath {
+//    if (indexPath.row == [self.players count])
+//    {
+//        return UITableViewCellEditingStyleInsert;
+//    }
+//    else
+//        return UITableViewCellEditingStyleNone;
+//}
 
 
 #pragma mark - Table View Delegate

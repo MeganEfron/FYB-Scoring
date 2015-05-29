@@ -100,7 +100,23 @@
 
 
 
+- (void)textFieldDidEndEditing:(UITextField *)textField {
+
+    [self updateDataFromTextField:textField];
+    
+}
+
+
+
 - (BOOL)textFieldShouldReturn:(UITextField *)textField {
+    [self updateDataFromTextField:textField];
+    
+    return YES;
+}
+
+
+
+- (void)updateDataFromTextField:(UITextField *)textField {
     [textField resignFirstResponder];
     
     NSInteger previousBet = self.entry.betValue;
@@ -161,8 +177,6 @@
         [[FYBGameManager sharedManager] nextRound];
         [[NSNotificationCenter defaultCenter] postNotificationName:NotificationNextRound object:nil];
     }
-    
-    return YES;
 }
 
 
